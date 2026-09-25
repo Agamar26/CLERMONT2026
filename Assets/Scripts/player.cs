@@ -9,6 +9,7 @@ public class player : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 move;
     public float speed;
+    public float stamina=100f;
     public float radiusDetectGround;
     public LayerMask layerGround;
     public bool isGrounded;
