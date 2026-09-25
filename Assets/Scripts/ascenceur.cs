@@ -10,7 +10,7 @@ public class ascenceur : MonoBehaviour
     public bool changeEtage;
     public float differenceBeetwenEtage;
     public Vector2 elevatormove;
-   
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
