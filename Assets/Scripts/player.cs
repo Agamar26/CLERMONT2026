@@ -11,6 +11,7 @@ public class player : MonoBehaviour
     public float radiusDetectGround;
     public LayerMask layerGround;
     public bool isGrounded;
+    public float rotY;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +21,21 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        if(Mathf.Round(move.x) != 0)
+        {
+            if(Mathf.Round(move.x) < 0 )
+            {
+                rotY = 0;
+            }
+            else if (Mathf.Round(move.x) > 0)
+            {
+                rotY = 180;
+            }
+        }
+
+        transform.rotation = Quaternion.Euler(0, rotY, 0);
         isGrounded = Physics2D.OverlapCircle(transform.position - new Vector3(0, GetComponent<CapsuleCollider2D>().size.y/2, 0), radiusDetectGround, layerGround);
     }
 
