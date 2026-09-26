@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 92971777129646312}
   - component: {fileID: 907494768024292961}
-  - component: {fileID: 2373060250496869636}
   - component: {fileID: 4696762267601711143}
+  - component: {fileID: 1932041190238690924}
   m_Layer: 0
   m_Name: SpeedBonus
   m_TagString: Untagged
@@ -29,8 +29,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 36.12, y: 21.09, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.18, y: 0.18, z: 0.18}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 2766988075356371307, guid: 4335d4028ee94224cb72c9f9861ee640, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,8 +94,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
---- !u!61 &2373060250496869636
-BoxCollider2D:
+--- !u!114 &4696762267601711143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827706679893898280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3794f59d5396a4581bfa03616f57ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusSpeed
+  speedBonus: 5
+  duree: 5
+--- !u!68 &1932041190238690924
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -128,29 +142,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.21133333}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
---- !u!114 &4696762267601711143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4827706679893898280}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3794f59d5396a4581bfa03616f57ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BonusSpeed
-  speedBonus: 5
-  duree: 5
+  m_Points:
+  - {x: 4.6493163, y: -1.8303554}
+  - {x: 0.37339535, y: -4.0387278}
+  - {x: -3.940476, y: -3.8751197}
+  - {x: -4.8208656, y: 1.103998}
+  - {x: -0.54094523, y: 3.3805563}
+  - {x: 3.8219452, y: 3.268261}
+  - {x: 4.8055367, y: -1.6897094}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 1
