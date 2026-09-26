@@ -11,6 +11,9 @@ public class player : MonoBehaviour
     public Vector2 move;
     public float speed;
     public float stamina=100f;
+    public float maxStamina = 100f;
+    public float health = 100f;
+    public float maxHealth = 100f;
     public float radiusDetectGround;
     public LayerMask layerGround;
     public bool isGrounded;
