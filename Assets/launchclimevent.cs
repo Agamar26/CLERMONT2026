@@ -15,7 +15,7 @@ public class launchclimevent : StateMachineBehaviour
         {
             player.instance.animatorClim.updateMode = AnimatorUpdateMode.Fixed;
             player.instance.state = player.playerstate.prelaunch;
-            player.instance.particlesFrost.SetActive(true);
+           
         }
     }
 
@@ -24,7 +24,7 @@ public class launchclimevent : StateMachineBehaviour
     {
         player.instance.animatorClim.updateMode = AnimatorUpdateMode.Normal;
         player.instance.state = player.playerstate.idle;
-        player.instance.particlesFrost.SetActive(true);
+       
         
     }
 

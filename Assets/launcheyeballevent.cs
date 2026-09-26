@@ -1,36 +1,25 @@
 using UnityEngine;
 
-public class launchfrosevent : StateMachineBehaviour
+public class launcheyeballevent : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        player.instance.state = player.playerstate.stuck; 
-    }
+    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-       if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
-        {
-            player.instance.particlesFrost.SetActive(true);
-        }
-    }
+    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    //{
+    //    
+    //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(player.instance.donthaveEye)
-        {
-            player.instance.state = player.playerstate.confused;
-        }
-        else
-        {
-            player.instance.state = player.playerstate.idle;
-        }
-
-            player.instance.particlesFrost.SetActive(false);
-        
+        animator.SetBool("Prelaunch", false);
+        player.instance.animatorClim.updateMode = AnimatorUpdateMode.Normal;
+        player.instance.state = player.playerstate.confused;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

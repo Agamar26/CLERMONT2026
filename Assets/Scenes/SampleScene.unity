@@ -597,7 +597,7 @@ GameObject:
   - component: {fileID: 879132829}
   m_Layer: 0
   m_Name: t (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -736,7 +736,7 @@ GameObject:
   - component: {fileID: 885134460}
   m_Layer: 0
   m_Name: t (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 1032574032}
   m_Layer: 0
   m_Name: t (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1305,7 +1305,7 @@ GameObject:
   - component: {fileID: 1524326537}
   m_Layer: 0
   m_Name: t (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1612,7 +1612,7 @@ GameObject:
   - component: {fileID: 1631398173}
   m_Layer: 0
   m_Name: t (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1751,7 +1751,7 @@ GameObject:
   - component: {fileID: 1748556218}
   m_Layer: 0
   m_Name: t (6)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5400,6 +5400,9 @@ MonoBehaviour:
   particlesFrost: {fileID: 6742291168778909667}
   brasPoint: {fileID: 3411615357994650988}
   rotbras: 0
+  launchdirection: {x: 0, y: 0}
+  forceLaunch: 20
+  donthaveEye: 0
 --- !u!212 &3997252882433614439
 SpriteRenderer:
   serializedVersion: 3

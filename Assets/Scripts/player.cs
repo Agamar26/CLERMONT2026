@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using UnityEngine.WSA;
 using static enemy;
 
 public class player : MonoBehaviour
@@ -22,15 +23,19 @@ public class player : MonoBehaviour
     public float cameraSpeed;
     public PlayerInput inputPlayer;
     public Animator animatorClim;
-    public enum playerstate { idle,stuck,frost,confused , prelaunch };
+    public enum playerstate { idle,stuck,frost,confused , prelaunch,launch };
     public playerstate state;
     public bool cantMove;
     public GameObject particlesFrost;
     public Transform brasPoint;
     public float rotbras;
+    public Vector2 launchdirection;
+    public float forceLaunch;
+    public bool donthaveEye;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale =1f;
         if(instance == null)
         {
             instance = this;
@@ -101,21 +106,24 @@ public class player : MonoBehaviour
                 animatorClim.SetBool("Run", false);
                 break;
             case playerstate.prelaunch:
-                var ezzezz = camera.ScreenToWorldPoint(Input.mousePosition)- transform.position;
-                var ezqq = Mathf.Atan2(ezzezz.y, ezzezz.x) * Mathf.Rad2Deg;
+                launchdirection = (camera.ScreenToWorldPoint(Input.mousePosition)- transform.position).normalized;
+                var ezqq = Mathf.Atan2(launchdirection.y, launchdirection.x) * Mathf.Rad2Deg;
                 print(ezqq);
+               
+                brasPoint.transform.rotation = Quaternion.Euler(0,0, ezqq);
 
-                brasPoint.transform.localEulerAngles = new Vector3(0,0, ezqq);
-
-                if (ezzezz.x  < transform.position.x)
+                if (launchdirection.x  < transform.position.x)
                 {
                     rotY = 180;
                 }
-                else if (ezzezz.x > transform.position.x)
+                else if (launchdirection.x > transform.position.x)
                 {
                     rotY = 0;
                 }
                 transform.rotation = Quaternion.Euler(0, rotY, 0);
+                break;
+            case playerstate.launch:
+              
                 break;
 
            
@@ -143,7 +151,7 @@ public class player : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(-Mathf.Round(move.x) * speed, -Mathf.Round(move.y) * speed);
         }
-        else if(state == playerstate.prelaunch)
+        else if(state == playerstate.prelaunch || state == playerstate.launch)
         {
             rb.linearVelocity = new Vector2(0, 0);
         }
@@ -151,19 +159,37 @@ public class player : MonoBehaviour
     }
     public void AttackDebut(InputAction.CallbackContext context)
     {
-        animatorClim.SetBool("Frost", true);
+        if (state == playerstate.prelaunch)
+        {
+            animatorClim.SetTrigger("Launch");
+            
+        }
+        else
+        {
+            animatorClim.SetBool("Frost", true);
+        }
     }
     public void AttackFin(InputAction.CallbackContext context)
     {
-        animatorClim.SetBool("Frost", false);
+        if (state == playerstate.prelaunch)
+        {
+
+        }
+        else
+        {
+            animatorClim.SetBool("Frost", false);
+        }
+       
 
     }
     public void preLaunchDebut(InputAction.CallbackContext context)
     {
+        if(state == playerstate.confused ||state == playerstate.prelaunch ||state == playerstate.launch || donthaveEye) { return; }
         animatorClim.SetBool("Prelaunch", true);
     }
     public void preLaunchFin(InputAction.CallbackContext context)
     {
+        if (state == playerstate.confused) { return; }
         animatorClim.SetBool("Prelaunch", false);
 
     }
