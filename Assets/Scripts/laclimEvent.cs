@@ -44,7 +44,7 @@ public class laclimEvent : MonoBehaviour
         eyetolaunch.transform.parent = null;
         eyetolaunch.transform.position = transform.TransformPoint(pointbras.localPosition); 
         eyetolaunch.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
-        eyetolaunch.GetComponent<Rigidbody2D>().linearVelocity = player.instance.launchdirection * player.instance.forceLaunch;
+        eyetolaunch.GetComponent<Rigidbody2D>().linearVelocity = player.instance.launchdirection.normalized * player.instance.forceLaunch;
         eyetolaunch.GetComponent<eyeScript>().launched = true;
         eyetolaunch.GetComponent<eyeScript>().origin.Add(eyetolaunch.transform.position);
         eyetolaunch.GetComponent<eyeScript>().direction.Add(player.instance.launchdirection.normalized * player.instance.forceLaunch);

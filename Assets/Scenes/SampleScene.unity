@@ -358,7 +358,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -4543,7 +4543,19 @@ MonoBehaviour:
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3976031037547053358}
+        m_TargetAssemblyTypeName: player, Assembly-CSharp
+        m_MethodName: Look
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
@@ -5380,6 +5392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   rb: {fileID: 9084382540034088211}
   move: {x: 0, y: 0}
+  look: {x: 0, y: 0}
   speed: 5
   stamina: 100
   maxStamina: 100
@@ -5403,6 +5416,7 @@ MonoBehaviour:
   launchdirection: {x: 0, y: 0}
   forceLaunch: 20
   donthaveEye: 0
+  eyePos: {fileID: 2275074574564502465}
 --- !u!212 &3997252882433614439
 SpriteRenderer:
   serializedVersion: 3

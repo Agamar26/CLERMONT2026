@@ -10,6 +10,7 @@ public class player : MonoBehaviour
     public static player instance;
     public Rigidbody2D rb;
     public Vector2 move;
+    public Vector2 look;
     public float speed;
     public float stamina=100f;
     public float maxStamina = 100f;
@@ -32,6 +33,7 @@ public class player : MonoBehaviour
     public Vector2 launchdirection;
     public float forceLaunch;
     public bool donthaveEye;
+    public Transform eyePos;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -106,20 +108,47 @@ public class player : MonoBehaviour
                 animatorClim.SetBool("Run", false);
                 break;
             case playerstate.prelaunch:
-                launchdirection = (camera.ScreenToWorldPoint(Input.mousePosition)- transform.position).normalized;
+                
+                
+                if (inputPlayer.currentControlScheme == "Gamepad")
+                {
+                    launchdirection = (look).normalized;
+                }
+                else
+                {
+                    launchdirection = (look - (Vector2)transform.position).normalized;
+                }
+
+
                 var ezqq = Mathf.Atan2(launchdirection.y, launchdirection.x) * Mathf.Rad2Deg;
                 print(ezqq);
                
                 brasPoint.transform.rotation = Quaternion.Euler(0,0, ezqq);
-
-                if (launchdirection.x  < transform.position.x)
+                if (inputPlayer.currentControlScheme == "Gamepad")
                 {
-                    rotY = 180;
+                    if (look.x > 0)
+                    {
+                        rotY = 0;
+                    }
+                    else if (look.x < 0)
+                    {
+                        rotY = 180;
+                    }
                 }
-                else if (launchdirection.x > transform.position.x)
+                else
                 {
-                    rotY = 0;
+                    if ( look.x > transform.position.x)
+                    {
+                        rotY = 0;
+                    }
+                    else if (look.x < transform.position.x)
+                    {
+                        rotY = 180;
+                    }
                 }
+               
+                
+               
                 transform.rotation = Quaternion.Euler(0, rotY, 0);
                 break;
             case playerstate.launch:
@@ -212,6 +241,18 @@ public class player : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
+    }
+    public void Look(InputAction.CallbackContext context)
+    {
+        if(inputPlayer.currentControlScheme == "Gamepad")
+        {
+            look = context.ReadValue<Vector2>();
+        }
+        else
+        {
+            look = camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
+        }
+       
     }
     private void OnDrawGizmos()
     {

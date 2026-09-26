@@ -157,6 +157,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   launched: 0
+  origin: []
+  direction: []
+  divise: 1
+  timerCanGetBall: 0
+  nulllayermask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!58 &1914834133220252992
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -177,7 +184,7 @@ CircleCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 183
   m_ForceReceiveLayers:
     serializedVersion: 2
     m_Bits: 119
