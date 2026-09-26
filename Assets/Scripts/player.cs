@@ -22,12 +22,12 @@ public class player : MonoBehaviour
     public float cameraSpeed;
     public PlayerInput inputPlayer;
     public Animator animatorClim;
-    public enum playerstate { idle,stuck,frost,confused };
+    public enum playerstate { idle,stuck,frost,confused , prelaunch };
     public playerstate state;
     public bool cantMove;
     public GameObject particlesFrost;
-
-
+    public Transform brasPoint;
+    public float rotbras;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -49,6 +49,9 @@ public class player : MonoBehaviour
         switch (state)
         {
             case playerstate.idle:
+                var ezze = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+                var ez = Mathf.Atan2(ezze.y, ezze.x) * Mathf.Rad2Deg;
+                brasPoint.transform.rotation = Quaternion.Euler(0, 0, ez);
                 if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
                 {
                     animatorClim.SetBool("Run", true);
@@ -75,11 +78,11 @@ public class player : MonoBehaviour
                     animatorClim.SetBool("Run", true);
                     if (Mathf.Round(move.x) < 0)
                     {
-                        rotY = 180;
+                        rotY = 0;
                     }
                     else if (Mathf.Round(move.x) > 0)
                     {
-                        rotY = 0;
+                        rotY = 180;
                     }
                 }
                 else
@@ -96,6 +99,23 @@ public class player : MonoBehaviour
                 break;
             case playerstate.frost:
                 animatorClim.SetBool("Run", false);
+                break;
+            case playerstate.prelaunch:
+                var ezzezz = camera.ScreenToWorldPoint(Input.mousePosition)- transform.position;
+                var ezqq = Mathf.Atan2(ezzezz.y, ezzezz.x) * Mathf.Rad2Deg;
+                print(ezqq);
+
+                brasPoint.transform.localEulerAngles = new Vector3(0,0, ezqq);
+
+                if (ezzezz.x  < transform.position.x)
+                {
+                    rotY = 180;
+                }
+                else if (ezzezz.x > transform.position.x)
+                {
+                    rotY = 0;
+                }
+                transform.rotation = Quaternion.Euler(0, rotY, 0);
                 break;
 
            
@@ -123,6 +143,10 @@ public class player : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(-Mathf.Round(move.x) * speed, -Mathf.Round(move.y) * speed);
         }
+        else if(state == playerstate.prelaunch)
+        {
+            rb.linearVelocity = new Vector2(0, 0);
+        }
         
     }
     public void AttackDebut(InputAction.CallbackContext context)
@@ -134,16 +158,29 @@ public class player : MonoBehaviour
         animatorClim.SetBool("Frost", false);
 
     }
+    public void preLaunchDebut(InputAction.CallbackContext context)
+    {
+        animatorClim.SetBool("Prelaunch", true);
+    }
+    public void preLaunchFin(InputAction.CallbackContext context)
+    {
+        animatorClim.SetBool("Prelaunch", false);
+
+    }
     private void OnEnable()
     {
         inputPlayer.actions.FindAction("Attack").started += AttackDebut;
         inputPlayer.actions.FindAction("Attack").canceled += AttackFin;
+        inputPlayer.actions.FindAction("Jump").started += preLaunchDebut;
+        inputPlayer.actions.FindAction("Jump").canceled += preLaunchFin;
     }
 
     private void OnDisable()
     {
         inputPlayer.actions.FindAction("Attack").started -= AttackDebut;
         inputPlayer.actions.FindAction("Attack").canceled -= AttackFin;
+        inputPlayer.actions.FindAction("Jump").started -= preLaunchDebut;
+        inputPlayer.actions.FindAction("Jump").canceled -= preLaunchFin;
     }
 
     public void OnMove(InputAction.CallbackContext context)
