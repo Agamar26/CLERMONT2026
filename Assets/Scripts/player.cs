@@ -26,6 +26,8 @@ public class player : MonoBehaviour
     public playerstate state;
     public bool cantMove;
     public GameObject particlesFrost;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -47,7 +49,7 @@ public class player : MonoBehaviour
         switch (state)
         {
             case playerstate.idle:
-                if (Mathf.Round(move.x) != 0)
+                if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
                 {
                     animatorClim.SetBool("Run", true);
                     if (Mathf.Round(move.x) < 0)
@@ -90,11 +92,11 @@ public class player : MonoBehaviour
         camera.transform.position = Vector3.Lerp(camera.transform.position, new Vector3(transform.position.x, transform.position.y, -10), cameraSpeed * Time.fixedDeltaTime);
         if(state == playerstate.idle)
         {
-            rb.linearVelocity = new Vector2(Mathf.Round(move.x) * speed, rb.linearVelocityY);
+            rb.linearVelocity = new Vector2(Mathf.Round(move.x) * speed, Mathf.Round(move.y) * speed);
         }
         else if(state == playerstate.stuck)
         {
-            rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
+            rb.linearVelocity = new Vector2(0, 0);
         }
         
     }
