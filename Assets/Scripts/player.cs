@@ -230,6 +230,7 @@ public class player : MonoBehaviour
     }
     public void AttackDebut(InputAction.CallbackContext context)
     {
+        if(state == playerstate.invincible) { return; }
         if (state == playerstate.prelaunch)
         {
             animatorClim.SetTrigger("Launch");
@@ -255,7 +256,7 @@ public class player : MonoBehaviour
     }
     public void preLaunchDebut(InputAction.CallbackContext context)
     {
-        if(state == playerstate.confused ||state == playerstate.prelaunch ||state == playerstate.launch || donthaveEye) { return; }
+        if(state == playerstate.confused ||state == playerstate.prelaunch ||state == playerstate.launch || donthaveEye || state == playerstate.invincible ) { return; }
         animatorClim.SetBool("Prelaunch", true);
     }
     public void preLaunchFin(InputAction.CallbackContext context)
