@@ -13,7 +13,7 @@ public class gameManager : MonoBehaviour
     public string debutmessagemission;
     public int numberOfTasks;
     public GameObject prefMissionUI;
-
+    public GameObject containeruitasks;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,7 +22,18 @@ public class gameManager : MonoBehaviour
         {
             instance = this;
         }
-
+        for (int i = 0; i < numberOfTasks; i++)
+        {
+            var zae = Random.Range(0, objCourses.Count);
+            while (objCoursesToGet.Contains(objCourses[zae]))
+            {
+                zae = Random.Range(0, objCourses.Count);
+            }
+            objCoursesToGet.Add(objCourses[zae]);
+            var ezez = Instantiate(prefMissionUI, containeruitasks.transform);
+            ezez.GetComponentInChildren<TextMeshProUGUI>().text = $"{debutmessagemission} {objCourses[zae]}";
+        }
+        
     }
 
     // Update is called once per frame
