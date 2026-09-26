@@ -204,7 +204,7 @@ public class player : MonoBehaviour
     private void FixedUpdate()
     {
 
-        camera.transform.position = Vector3.Lerp(camera.transform.position, new Vector3(transform.position.x, transform.position.y, -10), cameraSpeed * Time.fixedDeltaTime);
+        
         if(state == playerstate.idle)
         {
             rb.linearVelocity = new Vector2(Mathf.Round(move.x) * speed, Mathf.Round(move.y) * speed);
