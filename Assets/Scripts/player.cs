@@ -11,7 +11,12 @@ public class player : MonoBehaviour
     public Rigidbody2D rb;
     public Vector2 move;
     public Vector2 look;
+    public GameObject caddie;
     public float speed;
+    public float basespeed;
+    public float speedBonus;
+    public float bonusTime=3f;
+    public float bonusTimer;
     public float stamina=100f;
     public float maxStamina = 100f;
     public float health = 100f;
@@ -24,7 +29,7 @@ public class player : MonoBehaviour
     public float cameraSpeed;
     public PlayerInput inputPlayer;
     public Animator animatorClim;
-    public enum playerstate { idle,stuck,frost,confused , prelaunch,launch };
+    public enum playerstate { idle,stuck,frost,confused , prelaunch,launch,invincible };
     public playerstate state;
     public bool cantMove;
     public GameObject particlesFrost;
@@ -56,6 +61,7 @@ public class player : MonoBehaviour
         switch (state)
         {
             case playerstate.idle:
+                speed = basespeed ;
                 var ezze = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 var ez = Mathf.Atan2(ezze.y, ezze.x) * Mathf.Rad2Deg;
                 brasPoint.transform.rotation = Quaternion.Euler(0, 0, ez);
@@ -145,12 +151,43 @@ public class player : MonoBehaviour
                     {
                         rotY = 180;
                     }
-                }
-               
-                
-               
+                }            
+
+
+
                 transform.rotation = Quaternion.Euler(0, rotY, 0);
                 break;
+
+            case playerstate.invincible:
+                speed = speedBonus;
+                caddie.SetActive(true);
+                animatorClim.SetBool("Run", false);
+                if (bonusTimer!= bonusTime)
+                {
+                    bonusTimer =Mathf.MoveTowards(bonusTimer, bonusTime, Time.deltaTime);
+                }
+                else
+                {
+                    caddie.SetActive(false);
+                    state = playerstate.idle;                    
+                }
+                if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
+                {
+                   
+                    if (Mathf.Round(move.x) < 0)
+                    {
+                        rotY = 180;
+                    }
+                    else if (Mathf.Round(move.x) > 0)
+                    {
+                        rotY = 0;
+                    }
+                }
+               
+
+                transform.rotation = Quaternion.Euler(0, rotY, 0);
+                break;
+
             case playerstate.launch:
               
                 break;
@@ -184,6 +221,11 @@ public class player : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, 0);
         }
+        else if(state == playerstate.invincible )
+        {
+            rb.linearVelocity = new Vector2(Mathf.Round(move.x) * speed, Mathf.Round(move.y) * speed);
+        }
+
         
     }
     public void AttackDebut(InputAction.CallbackContext context)

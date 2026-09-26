@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 907494768024292961}
   - component: {fileID: 4696762267601711143}
   - component: {fileID: 1932041190238690924}
+  - component: {fileID: -4364806681457230174}
   m_Layer: 0
-  m_Name: SpeedBonus
+  m_Name: InvincibleBonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4827706679893898280}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc3794f59d5396a4581bfa03616f57ce, type: 3}
   m_Name: 
@@ -156,3 +157,17 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 1
+--- !u!114 &-4364806681457230174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827706679893898280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b57f10cfd6dd6e4e873b4ce8adcb861, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusCaddie
+  speedBonus: 1
+  duree: 3
