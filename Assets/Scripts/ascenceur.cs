@@ -14,10 +14,11 @@ public class ascenceur : MonoBehaviour
     public Vector2 elevatormove;
     public Vector2 elevatormovedebut;
     public Vector2 elevatormoveup;
+    public LayerMask layerPlayer;
     public enum state { waitformount,pause,mount};
     public state stateascenceur;
     public List<Collider2D> colliders = new List<Collider2D>();
-    
+    public float radiusDetectPlayer;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +34,16 @@ public class ascenceur : MonoBehaviour
         switch(stateascenceur)
         {
             case state.waitformount:
+
+                var eez = Physics2D.OverlapCircle(transform.position, radiusDetectPlayer, layerPlayer);
+                if(eez)
+                {
+                    GetComponentInChildren<Animator>().SetBool("Open",true);
+                }
+                else
+                {
+                    GetComponentInChildren<Animator>().SetBool("Open", false);
+                }
                 if (Vector2.Distance(elevatormovedebut, player.instance.transform.position) > Vector2.Distance(elevatormoveup, player.instance.transform.position))
                 {
                     transform.position = elevatormoveup;
@@ -67,33 +78,47 @@ public class ascenceur : MonoBehaviour
                 break;
 
             case state.pause:
-                foreach (var item in colliders)
-                {
-                    item.gameObject.SetActive(false);
-                }
+                
                 if (pauseTimer != pauseTime)
                 {
                     pauseTimer = Mathf.MoveTowards(pauseTimer, pauseTime, 1f * Time.deltaTime);
                 }else
                 {
+                    foreach (var item in colliders)
+                    {
+                        item.gameObject.SetActive(false);
+                    }
                     stateascenceur = state.waitformount;
                 }
 
                 break;
 
             case state.mount:
+                player.instance.rb.constraints = RigidbodyConstraints2D.FreezeAll;
+                GetComponentInChildren<Animator>().SetBool("Open", false);
                 foreach (var item in colliders)
                 {
                     item.gameObject.SetActive(true);
                 }
-                if ((Vector2)transform.position != elevatormove)
+                if (pauseTimer <= pauseTime/6)
                 {
-                    transform.position = Vector2.MoveTowards((Vector2)transform.position,elevatormove,speedelevator * Time.deltaTime);
+                    pauseTimer = Mathf.MoveTowards(pauseTimer, pauseTime / 6, 1f * Time.deltaTime);
                 }
                 else
                 {
-                    stateascenceur = state.pause;
+                    if ((Vector2)transform.position != elevatormove)
+                    {
+                        transform.position = Vector2.MoveTowards((Vector2)transform.position, elevatormove, speedelevator * Time.deltaTime);
+                    }
+                    else
+                    {
+                        player.instance.rb.constraints = RigidbodyConstraints2D.None;
+                        player.instance.rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                        pauseTimer = 0;
+                        stateascenceur = state.pause;
+                    }
                 }
+                
 
                 break;
         }
@@ -101,7 +126,11 @@ public class ascenceur : MonoBehaviour
 
 
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radiusDetectPlayer);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Player")
