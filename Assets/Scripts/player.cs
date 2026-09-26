@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using static enemy;
 
 public class player : MonoBehaviour
 {
@@ -17,6 +18,11 @@ public class player : MonoBehaviour
     public Camera camera;
     public float cameraSpeed;
     public PlayerInput inputPlayer;
+    public Animator animatorClim;
+    public enum playerstate { idle,stuck,frost };
+    public playerstate state;
+    public bool cantMove;
+    public GameObject particlesFrost;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -24,42 +30,91 @@ public class player : MonoBehaviour
         {
             instance = this;
         }
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (instance == null)
         {
             instance = this;
         }
 
-        if (Mathf.Round(move.x) != 0)
+        switch (state)
         {
-            if(Mathf.Round(move.x) < 0 )
-            {
-                rotY = 180;
-            }
-            else if (Mathf.Round(move.x) > 0)
-            {
-                rotY = 0;
-            }
-        }
+            case playerstate.idle:
+                if (Mathf.Round(move.x) != 0)
+                {
+                    animatorClim.SetBool("Run", true);
+                    if (Mathf.Round(move.x) < 0)
+                    {
+                        rotY = 180;
+                    }
+                    else if (Mathf.Round(move.x) > 0)
+                    {
+                        rotY = 0;
+                    }
+                }
+                else
+                {
+                    animatorClim.SetBool("Run", false);
+                }
 
-        transform.rotation = Quaternion.Euler(0, rotY, 0);
-        isGrounded = Physics2D.OverlapCircle(transform.position - new Vector3(0, GetComponent<CapsuleCollider2D>().size.y/2, 0), radiusDetectGround, layerGround);
+                transform.rotation = Quaternion.Euler(0, rotY, 0);
+                isGrounded = Physics2D.OverlapCircle(transform.position - new Vector3(0, GetComponent<CapsuleCollider2D>().size.y / 2, 0), radiusDetectGround, layerGround);
+                break;
+
+            case playerstate.stuck:
+                animatorClim.SetBool("Run", false);
+                break;
+            case playerstate.frost:
+                animatorClim.SetBool("Run", false);
+                break;
+
+           
+        }
+     
+
+        
 
         
     }
 
     private void FixedUpdate()
     {
+
         camera.transform.position = Vector3.Lerp(camera.transform.position, new Vector3(transform.position.x, transform.position.y, -10), cameraSpeed * Time.fixedDeltaTime);
-        rb.linearVelocity = new Vector2(Mathf.Round(move.x) * speed, rb.linearVelocityY);
+        if(state == playerstate.idle)
+        {
+            rb.linearVelocity = new Vector2(Mathf.Round(move.x) * speed, rb.linearVelocityY);
+        }
+        else if(state == playerstate.stuck)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocityY);
+        }
+        
+    }
+    public void AttackDebut(InputAction.CallbackContext context)
+    {
+        animatorClim.SetBool("Frost", true);
+    }
+    public void AttackFin(InputAction.CallbackContext context)
+    {
+        animatorClim.SetBool("Frost", false);
+
+    }
+    private void OnEnable()
+    {
+        inputPlayer.actions.FindAction("Attack").started += AttackDebut;
+        inputPlayer.actions.FindAction("Attack").canceled += AttackFin;
     }
 
-
+    private void OnDisable()
+    {
+        inputPlayer.actions.FindAction("Attack").started -= AttackDebut;
+        inputPlayer.actions.FindAction("Attack").canceled -= AttackFin;
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {

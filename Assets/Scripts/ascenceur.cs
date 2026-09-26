@@ -63,14 +63,16 @@ public class ascenceur : MonoBehaviour
                         {
                             elevatormove = elevatormoveup;
                             currentEtage = 1;
-                            pauseTimer = 0;
+                            pauseTimer = 0; gameManager.instance.textInteraction.text = "";
+                            gameManager.instance.textInteraction.enabled = false;
                             stateascenceur = state.mount;
                         }
                         else if (Mathf.Round(player.instance.move.y) < 0 && (Vector2)transform.position == elevatormoveup)
                         {
                             elevatormove = elevatormovedebut;
                             currentEtage = 0;
-                            pauseTimer = 0;
+                            pauseTimer = 0; gameManager.instance.textInteraction.text = "";
+                            gameManager.instance.textInteraction.enabled = false;
                             stateascenceur = state.mount;
                         }
                     }
@@ -78,12 +80,14 @@ public class ascenceur : MonoBehaviour
                 break;
 
             case state.pause:
-                
+                player.instance.state = player.playerstate.idle;
                 if (pauseTimer != pauseTime)
                 {
                     pauseTimer = Mathf.MoveTowards(pauseTimer, pauseTime, 1f * Time.deltaTime);
                 }else
                 {
+                    gameManager.instance.textInteraction.text = "Press Up Or Down For Move Elevator";
+                    gameManager.instance.textInteraction.enabled = true;
                     foreach (var item in colliders)
                     {
                         item.gameObject.SetActive(false);
@@ -100,6 +104,7 @@ public class ascenceur : MonoBehaviour
                 {
                     item.gameObject.SetActive(true);
                 }
+                player.instance.state = player.playerstate.stuck;
                 if (pauseTimer <= pauseTime/6)
                 {
                     pauseTimer = Mathf.MoveTowards(pauseTimer, pauseTime / 6, 1f * Time.deltaTime);
@@ -135,6 +140,8 @@ public class ascenceur : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            gameManager.instance.textInteraction.text = "Press Up Or Down For Move Elevator";
+            gameManager.instance.textInteraction.enabled = true;
             collision.transform.parent = transform;
             print("Can use elevator");
             playerCanUse = true;
@@ -144,6 +151,8 @@ public class ascenceur : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            gameManager.instance.textInteraction.text = "";
+            gameManager.instance.textInteraction.enabled = false;
             collision.transform.parent = null;
             print("Can't use elevator");
             playerCanUse = false;
