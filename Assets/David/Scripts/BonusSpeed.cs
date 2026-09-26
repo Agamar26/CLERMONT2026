@@ -1,16 +1,24 @@
 using UnityEngine;
+using System.Collections;
 
 public class BonusSpeed : MonoBehaviour
 {
+    public float speedBonus = 1f;
+    public float duree = 5f;
 
-    public float speedBonus=1f;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
-        {
-            player.instance.speed += speedBonus;
-            Destroy(gameObject);
-        }
+        if (!collision.CompareTag("Player")) return;
+
+        var p = player.instance;
+        p.StartCoroutine(ApplySpeedBonus(p, speedBonus, duree));
+        Destroy(gameObject);
+    }
+
+    private static IEnumerator ApplySpeedBonus(player p, float bonus, float duree)
+    {
+        p.speed += bonus;
+        yield return new WaitForSeconds(duree);
+        p.speed -= bonus;
     }
 }
