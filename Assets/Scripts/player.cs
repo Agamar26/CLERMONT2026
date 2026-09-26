@@ -22,7 +22,7 @@ public class player : MonoBehaviour
     public float cameraSpeed;
     public PlayerInput inputPlayer;
     public Animator animatorClim;
-    public enum playerstate { idle,stuck,frost };
+    public enum playerstate { idle,stuck,frost,confused };
     public playerstate state;
     public bool cantMove;
     public GameObject particlesFrost;
@@ -49,6 +49,27 @@ public class player : MonoBehaviour
         switch (state)
         {
             case playerstate.idle:
+                if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
+                {
+                    animatorClim.SetBool("Run", true);
+                    if (Mathf.Round(move.x) < 0)
+                    {
+                        rotY = 180;
+                    }
+                    else if (Mathf.Round(move.x) > 0)
+                    {
+                        rotY = 0;
+                    }
+                }
+                else
+                {
+                    animatorClim.SetBool("Run", false);
+                }
+
+                transform.rotation = Quaternion.Euler(0, rotY, 0);
+                isGrounded = Physics2D.OverlapCircle(transform.position - new Vector3(0, GetComponent<CapsuleCollider2D>().size.y / 2, 0), radiusDetectGround, layerGround);
+                break;
+            case playerstate.confused:
                 if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
                 {
                     animatorClim.SetBool("Run", true);
@@ -97,6 +118,10 @@ public class player : MonoBehaviour
         else if(state == playerstate.stuck)
         {
             rb.linearVelocity = new Vector2(0, 0);
+        }
+        else if(state == playerstate.confused)
+        {
+            rb.linearVelocity = new Vector2(-Mathf.Round(move.x) * speed, -Mathf.Round(move.y) * speed);
         }
         
     }
