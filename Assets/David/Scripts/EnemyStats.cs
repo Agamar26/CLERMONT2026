@@ -20,9 +20,9 @@ public class EnemyStats : MonoBehaviour
 
     public event Action<EnemyStats> OnDeath;
 
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     private readonly List<float> modificateurs = new List<float>();
-
+    
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -82,10 +82,13 @@ public class EnemyStats : MonoBehaviour
     private void RecalculerVitesse()
     {
         float v = baseSpeed;
-        foreach (float m in modificateurs) v *= m;
+        foreach (float m in modificateurs) v *= m * gameManager.instance.animatorSpeed;
         agent.speed = v;
     }
-
+    private void Update()
+    {
+        
+    }
     // --- Mort ---
 
     private void Die()
