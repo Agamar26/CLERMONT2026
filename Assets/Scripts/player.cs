@@ -96,6 +96,7 @@ public class player : MonoBehaviour
                 isGrounded = Physics2D.OverlapCircle(transform.position - new Vector3(0, GetComponent<CapsuleCollider2D>().size.y / 2, 0), radiusDetectGround, layerGround);
                 break;
             case playerstate.confused:
+                timerbarFrost = Mathf.MoveTowards(timerbarFrost, timeBarFrost, Time.deltaTime);
                 if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
                 {
                     animatorClim.SetBool("Run", true);

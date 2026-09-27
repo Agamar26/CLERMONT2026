@@ -172,6 +172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   maxHealth: 10
   baseSpeed: 3.5
+  speeddebase: 0
 --- !u!70 &-2342802937127494519
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -192,10 +193,10 @@ CapsuleCollider2D:
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 375
   m_ForceReceiveLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 375
   m_ContactCaptureLayers:
     serializedVersion: 2
     m_Bits: 4294967295
