@@ -15,6 +15,9 @@ public class gameManager : MonoBehaviour
     public int numberOfTasks;
     public GameObject prefMissionUI;
     public GameObject containeruitasks;
+    public LayerMask layerPlayer;
+    public float radiusdetectplayer;
+    public GameObject doors;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,11 +49,12 @@ public class gameManager : MonoBehaviour
         {
             instance = this;
         }
-
+        int dffd = 0;
         for(int i = 0;i < objCoursesToGetTaken.Count;i++)
         {
             if(objCoursesToGetTaken[i])
             {
+                dffd++;
                 objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
             }
             else
@@ -58,5 +62,37 @@ public class gameManager : MonoBehaviour
                 objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
             }  
         }
+        var dds = Physics2D.OverlapCircle(doors.transform.position, radiusdetectplayer, layerPlayer);
+        if (dffd == numberOfTasks)
+        {
+           
+            if(dds)
+            {
+                doors.GetComponent<Animator>().SetBool("Open", true);
+            }
+            else
+            {
+                doors.GetComponent<Animator>().SetBool("Open", false);
+            }
+        }
+        else
+        {
+            if(dds)
+            {
+                textInteraction.GetComponent<TextMeshProUGUI>().enabled = true;
+                textInteraction.GetComponent<TextMeshProUGUI>().text = "Recuperez toutes les courses avant de sortir";
+            }
+            else
+            {
+                textInteraction.GetComponent<TextMeshProUGUI>().enabled = false;
+            }
+            
+        }
+        
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(doors.transform.position, radiusdetectplayer);
     }
 }
