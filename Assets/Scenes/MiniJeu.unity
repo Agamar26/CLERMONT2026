@@ -226,7 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4967a122be293f340b1564d9286b6831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VoitureJoueur
-  vitesseChangement: 10
+  vitesse: 6
+  marge: 0.5
 --- !u!50 &345837375
 Rigidbody2D:
   serializedVersion: 5

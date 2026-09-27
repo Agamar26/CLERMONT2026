@@ -3392,7 +3392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64ac125e16e54b4295668feee82de7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuPrincipal
-  sceneJeu: Tiles
+  sceneJeu: GameScene
   panelMenu: {fileID: 616831795}
   panelOptions: {fileID: 365605478}
   panelCredits: {fileID: 1702461654}

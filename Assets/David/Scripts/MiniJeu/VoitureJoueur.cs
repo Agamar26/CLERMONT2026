@@ -4,37 +4,42 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 public class VoitureJoueur : MonoBehaviour
 {
-    public float vitesseChangement = 10f;
+    public float vitesse = 6f;
+    public float marge = 0.5f;   // dépassement autorisé au-delà des voies extrêmes
 
-    private int voie;
+    private float yMin, yMax;
 
     void Start()
     {
         var voies = RaceManager.Instance.voies;
-        voie = voies.Length / 2;
-        var p = transform.position;
-        p.y = voies[voie];
-        transform.position = p;
+        yMin = Mathf.Min(voies) - marge;
+        yMax = Mathf.Max(voies) + marge;
     }
 
     void Update()
     {
         if (Time.timeScale == 0f) return;
 
-        var k = Keyboard.current;
+        float input = 0f;
+
         var g = Gamepad.current;
+        if (g != null)
+        {
+            input += g.leftStick.y.ReadValue();
+            input += g.dpad.y.ReadValue();
+        }
 
-        bool haut = (k != null && (k.upArrowKey.wasPressedThisFrame || k.wKey.wasPressedThisFrame))
-                 || (g != null && g.dpad.up.wasPressedThisFrame);
-        bool bas = (k != null && (k.downArrowKey.wasPressedThisFrame || k.sKey.wasPressedThisFrame))
-                 || (g != null && g.dpad.down.wasPressedThisFrame);
+        var k = Keyboard.current;
+        if (k != null)
+        {
+            if (k.upArrowKey.isPressed || k.wKey.isPressed) input += 1f;
+            if (k.downArrowKey.isPressed || k.sKey.isPressed) input -= 1f;
+        }
 
-        var voies = RaceManager.Instance.voies;
-        if (haut) voie = Mathf.Min(voie + 1, voies.Length - 1);
-        if (bas) voie = Mathf.Max(voie - 1, 0);
+        input = Mathf.Clamp(input, -1f, 1f);
 
         var pos = transform.position;
-        pos.y = Mathf.MoveTowards(pos.y, voies[voie], vitesseChangement * Time.deltaTime);
+        pos.y = Mathf.Clamp(pos.y + input * vitesse * Time.deltaTime, yMin, yMax);
         transform.position = pos;
     }
 

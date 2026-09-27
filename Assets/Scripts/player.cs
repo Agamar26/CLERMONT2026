@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -12,6 +14,9 @@ public class player : MonoBehaviour
     public Vector2 move;
     public Vector2 look;
     public GameObject caddie;
+    public GameObject chapeau;
+    public GameObject imper;
+    public GameObject lunettes;
     public float speed;
     public float basespeed;
     public float speedBonus;
@@ -40,6 +45,9 @@ public class player : MonoBehaviour
     public bool donthaveEye;
     public Transform eyePos;
     public float timerbarFrost,timeBarFrost;
+
+    private Coroutine deguisement;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -269,6 +277,35 @@ public class player : MonoBehaviour
         if (state == playerstate.confused) { return; }
         animatorClim.SetBool("Prelaunch", false);
 
+    }
+
+    public void Deguiser(float duree)
+    {
+        // Un nouveau déguisement relance le chrono au lieu de se couper trop tôt
+        if (deguisement != null) StopCoroutine(deguisement);
+        deguisement = StartCoroutine(Deguisement(duree));
+    }
+
+    private IEnumerator Deguisement(float duree)
+    {
+        Show();
+        yield return new WaitForSeconds(duree);
+        Hide();
+        deguisement = null;
+    }
+
+    public void Hide()
+    {
+        chapeau.SetActive(false);
+        imper.SetActive(false);
+        lunettes.SetActive(false);
+    }
+
+    public void Show()
+    {
+        chapeau.SetActive(true);
+        imper.SetActive(true);
+        lunettes.SetActive(true);
     }
     private void OnEnable()
     {
