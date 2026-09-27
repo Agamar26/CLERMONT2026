@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3834393100628888597}
   - component: {fileID: 4143595217327797182}
   - component: {fileID: 8962905539748809124}
+  - component: {fileID: 6135329382986114882}
   m_Layer: 0
   m_Name: EnemiNavmesh
   m_TagString: Untagged
@@ -156,3 +157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e919cafb1bf09347b015ef92fe7a408, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnnemiChase
+--- !u!114 &6135329382986114882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2931265515235309098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e9544a0a1e5b44c803d62f7c1f280d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  maxHealth: 10
+  baseSpeed: 3.5
