@@ -10,6 +10,7 @@ public class gameManager : MonoBehaviour
     public List<string> objCourses = new List<string>();
     public List<string> objCoursesToGet = new List<string>();
     public List<bool> objCoursesToGetTaken = new List<bool>();
+    public List<GameObject> objCoursesToGetTakenUI = new List<GameObject>();
     public string debutmessagemission;
     public int numberOfTasks;
     public GameObject prefMissionUI;
@@ -30,8 +31,10 @@ public class gameManager : MonoBehaviour
                 zae = Random.Range(0, objCourses.Count);
             }
             objCoursesToGet.Add(objCourses[zae]);
+            objCoursesToGetTaken.Add(false);
             var ezez = Instantiate(prefMissionUI, containeruitasks.transform);
             ezez.GetComponentInChildren<TextMeshProUGUI>().text = $"{debutmessagemission} {objCourses[zae]}";
+           objCoursesToGetTakenUI.Add(ezez);
         }
         
     }
@@ -42,6 +45,18 @@ public class gameManager : MonoBehaviour
         if(instance == null)
         {
             instance = this;
+        }
+
+        for(int i = 0;i < objCoursesToGetTaken.Count;i++)
+        {
+            if(objCoursesToGetTaken[i])
+            {
+                objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+            }
+            else
+            {
+                objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+            }  
         }
     }
 }
