@@ -89,6 +89,7 @@ public class EnemyStats : MonoBehaviour
     {
         
     }
+
     // --- Mort ---
 
     private void Die()
