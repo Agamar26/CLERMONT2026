@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Android;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyStats : MonoBehaviour
@@ -15,6 +16,7 @@ public class EnemyStats : MonoBehaviour
     public float BaseSpeed => baseSpeed;
     public float Speed => agent.speed;
     public bool IsDead => Health <= 0f;
+    public float speeddebase;//pour les particules
 
     public event Action<EnemyStats> OnDeath;
 
@@ -24,6 +26,7 @@ public class EnemyStats : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        speeddebase = agent.speed;
         Health = maxHealth;
         RecalculerVitesse();
     }

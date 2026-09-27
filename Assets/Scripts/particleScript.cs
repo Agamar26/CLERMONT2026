@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class particleScript : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class particleScript : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if(other.gameObject.tag == "Enemy")
+        if(other.gameObject.tag == "Enemy" && other.GetComponent<NavMeshAgent>().speed ==  other.GetComponent<EnemyStats>().speeddebase)
         {
             other.GetComponent<EnemyStats>().ModifySpeed(0.5f, 3);
         }
