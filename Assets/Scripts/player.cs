@@ -39,6 +39,7 @@ public class player : MonoBehaviour
     public float forceLaunch;
     public bool donthaveEye;
     public Transform eyePos;
+    public float timerbarFrost,timeBarFrost;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -61,6 +62,7 @@ public class player : MonoBehaviour
         switch (state)
         {
             case playerstate.idle:
+                timerbarFrost = Mathf.MoveTowards(timerbarFrost, timeBarFrost, Time.deltaTime);
                 speed = basespeed ;
                 var ezze = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
                 var ez = Mathf.Atan2(ezze.y, ezze.x) * Mathf.Rad2Deg;
@@ -108,6 +110,9 @@ public class player : MonoBehaviour
                 break;
 
             case playerstate.stuck:
+               
+               
+               
                 animatorClim.SetBool("Run", false);
                 break;
             case playerstate.frost:

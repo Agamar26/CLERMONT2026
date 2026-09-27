@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class gameManager : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class gameManager : MonoBehaviour
     public LayerMask layerPlayer;
     public float radiusdetectplayer;
     public GameObject doors;
+    public Image FrostBar;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -88,6 +90,7 @@ public class gameManager : MonoBehaviour
             }
             
         }
+        FrostBar.fillAmount = player.instance.timerbarFrost / player.instance.timeBarFrost;
         
     }
     private void OnDrawGizmos()

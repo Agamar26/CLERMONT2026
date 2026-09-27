@@ -13,7 +13,18 @@ public class launchfrosevent : StateMachineBehaviour
     {
        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
         {
-            player.instance.particlesFrost.SetActive(true);
+            if(player.instance.timerbarFrost != 0)
+            {
+                
+                player.instance.timerbarFrost = Mathf.MoveTowards(player.instance.timerbarFrost, 0, Time.deltaTime);
+                
+                player.instance.particlesFrost.SetActive(true);
+            }
+            else
+            {
+                player.instance.particlesFrost.SetActive(false);
+            }
+            
         }
     }
 
