@@ -1008,6 +1008,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::gameManager
   textInteraction: {fileID: 0}
   animatorSpeed: 1
+  objCourses: []
+  objCoursesToGet: []
+  objCoursesToGetTaken: 
+  debutmessagemission: 
+  numberOfTasks: 0
+  prefMissionUI: {fileID: 0}
+  containeruitasks: {fileID: 0}
 --- !u!4 &563000072
 Transform:
   m_ObjectHideFlags: 0
@@ -2059,6 +2066,57 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1056374289
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1056374291}
+  - component: {fileID: 1056374290}
+  m_Layer: 0
+  m_Name: EnemiesSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1056374290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056374289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8016b6bf325d2444b87600abc9cc0aef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
+  enemyPrefabs: []
+  limites: {fileID: 0}
+  spawnInterval: 3
+  maxEnemies: 10
+  distanceMinJoueur: 4
+  horsEcran: 1
+  essaisMax: 20
+--- !u!4 &1056374291
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056374289}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 343.25, y: 199.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092790573
 GameObject:
   m_ObjectHideFlags: 0
@@ -4555,3 +4613,4 @@ SceneRoots:
   - {fileID: 755458663}
   - {fileID: 563000072}
   - {fileID: 2050680058}
+  - {fileID: 1056374291}
