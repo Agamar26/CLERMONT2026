@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     public float radiusdetectplayer;
     public GameObject doors;
     public Image FrostBar;
+    public bool CourseOk = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,8 +68,9 @@ public class gameManager : MonoBehaviour
         var dds = Physics2D.OverlapCircle(doors.transform.position, radiusdetectplayer, layerPlayer);
         if (dffd == numberOfTasks)
         {
-           
-            if(dds)
+            CourseOk = true;
+
+            if (dds)
             {
                 doors.GetComponent<Animator>().SetBool("Open", true);
             }

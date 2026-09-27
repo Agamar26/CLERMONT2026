@@ -133,12 +133,12 @@ TextureImporter:
       name: AscenceurPorte_1
       rect:
         serializedVersion: 2
-        x: 104
-        y: 121
-        width: 255
-        height: 280
-      alignment: 4
-      pivot: {x: 0, y: 0.5}
+        x: 105
+        y: 122
+        width: 253
+        height: 278
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -147,6 +147,28 @@ TextureImporter:
       bones: []
       spriteID: 75b9297eee21c14f0800000000000000
       internalID: -856789011810575529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AscenceurPorte_5
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 89
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c623ce368aa21b429d0b9e16ce4d68a
+      internalID: -7878257817269282265
       vertices: []
       indices: 
       edges: []
@@ -163,7 +185,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       AscenceurPorte_0: -8723045793606797498
       AscenceurPorte_1: -856789011810575529
