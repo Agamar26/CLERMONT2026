@@ -183,7 +183,15 @@ public class player : MonoBehaviour
                 else
                 {
                     caddie.SetActive(false);
-                    state = playerstate.idle;                    
+                    if(donthaveEye)
+                    {
+                        state = playerstate.confused;
+                    }
+                    else
+                    {
+                        state = playerstate.idle;
+                    }
+                                   
                 }
                 if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
                 {
@@ -235,7 +243,11 @@ public class player : MonoBehaviour
         {
             rb.linearVelocity = new Vector2(0, 0);
         }
-        else if(state == playerstate.invincible )
+        else if(state == playerstate.invincible && donthaveEye)
+        {
+            rb.linearVelocity = new Vector2(-Mathf.Round(move.x) * speed, -Mathf.Round(move.y) * speed);
+        }
+        else if(state == playerstate.invincible && !donthaveEye)
         {
             rb.linearVelocity = new Vector2(Mathf.Round(move.x) * speed, Mathf.Round(move.y) * speed);
         }

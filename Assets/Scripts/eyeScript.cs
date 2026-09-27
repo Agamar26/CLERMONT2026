@@ -58,7 +58,7 @@ public class eyeScript : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!launched) { return; }
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Enemy")
         {
             
             var ezez = Physics2D.Raycast(origin[origin.Count-1],(Vector2)transform.position- origin[origin.Count-1], 50);
