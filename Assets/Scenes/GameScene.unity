@@ -1664,6 +1664,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: RotationModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.collisionMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.maxCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.maxCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.maxCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: CollisionModule.m_EnergyLossOnCollision.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 7749021254736249328, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
       propertyPath: m_Name
       value: Player
@@ -1711,13 +1763,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3817405271413837124, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1704826556}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9038937395671002998, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 737166932}
   m_SourcePrefab: {fileID: 100100000, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
 --- !u!4 &732418209 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3776861732149636272, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
   m_PrefabInstance: {fileID: 732418208}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &737166930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9038937395671002998, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+  m_PrefabInstance: {fileID: 732418208}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &737166932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737166930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae067a182f7648445be78670191f58a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::particleScript
 --- !u!1 &785012333
 GameObject:
   m_ObjectHideFlags: 0
