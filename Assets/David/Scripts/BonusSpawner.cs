@@ -7,18 +7,33 @@ public class BonusSpawner : MonoBehaviour
     public Transform[] spawnPoints;
     public float spawnInterval = 5f;
     public int maxBonus = 3;
+    public float delaiReapparition = 10f;   // temps avant qu'un point ramassé redevienne disponible
 
     private GameObject[] occupants;
+    private bool[] occupe;
+    private float[] disponibleA;
     private float nextSpawnTime;
 
     void Start()
     {
         occupants = new GameObject[spawnPoints.Length];
+        occupe = new bool[spawnPoints.Length];
+        disponibleA = new float[spawnPoints.Length];
         nextSpawnTime = Time.time + spawnInterval;
     }
 
     void Update()
     {
+        // Détecte les bonus ramassés et lance le délai sur leur point
+        for (int i = 0; i < occupants.Length; i++)
+        {
+            if (occupe[i] && occupants[i] == null)
+            {
+                occupe[i] = false;
+                disponibleA[i] = Time.time + delaiReapparition;
+            }
+        }
+
         if (Time.time < nextSpawnTime) return;
 
         SpawnBonus();
@@ -33,13 +48,12 @@ public class BonusSpawner : MonoBehaviour
             return;
         }
 
-        // Points libres (un bonus détruit devient null)
         var libres = new List<int>();
         int presents = 0;
         for (int i = 0; i < occupants.Length; i++)
         {
-            if (occupants[i] == null) libres.Add(i);
-            else presents++;
+            if (occupe[i]) presents++;
+            else if (Time.time >= disponibleA[i]) libres.Add(i);
         }
 
         if (presents >= maxBonus || libres.Count == 0) return;
@@ -47,5 +61,6 @@ public class BonusSpawner : MonoBehaviour
         int point = libres[Random.Range(0, libres.Count)];
         var prefab = bonusPrefabs[Random.Range(0, bonusPrefabs.Length)];
         occupants[point] = Instantiate(prefab, spawnPoints[point].position, Quaternion.identity);
+        occupe[point] = true;
     }
 }

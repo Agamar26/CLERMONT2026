@@ -31,6 +31,14 @@ public class gameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        // Évite une boucle infinie si on demande plus d'articles qu'il n'en existe
+        if (numberOfTasks > objCourses.Count)
+        {
+            Debug.LogWarning($"numberOfTasks ({numberOfTasks}) > nombre d'articles ({objCourses.Count}), valeur plafonnée.");
+            numberOfTasks = objCourses.Count;
+        }
+
         for (int i = 0; i < numberOfTasks; i++)
         {
             var zae = Random.Range(0, objCourses.Count);
