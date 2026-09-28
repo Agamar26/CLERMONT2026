@@ -9,10 +9,14 @@ public class objToGet : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
 
         var gm = gameManager.instance;
-        int index = gm.objCoursesToGet.IndexOf(nameOfObj);
-        if (index < 0) return;   // pas sur la liste : l'objet reste en rayon
-
-        gm.objCoursesToGetTaken[index] = true;
-        Destroy(gameObject);
+        for (int i = 0; i < gm.objCoursesToGet.Count; i++)
+        {
+            if (!gm.objCoursesToGetTaken[i] && gm.objCoursesToGet[i].Contains(nameOfObj))
+            {
+                gm.objCoursesToGetTaken[i] = true;
+                Destroy(gameObject);
+                return;
+            }
+        }
     }
 }
