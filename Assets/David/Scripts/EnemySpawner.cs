@@ -14,6 +14,10 @@ public class EnemySpawner : MonoBehaviour
     public int tailleMax = 4;
     public float rayonGroupe = 1.5f;
 
+    [Header("Vitesse aléatoire")]
+    public float vitesseMin = 2.5f;
+    public float vitesseMax = 4.5f;
+
     [Header("Boss")]
     public GameObject bossPrefab;
     public int premiereVagueBoss = 5;   // vague de première apparition
@@ -96,7 +100,12 @@ public class EnemySpawner : MonoBehaviour
         foreach (var prefab in ChoisirTypes(taille))
         {
             Vector3 pos = TrouverPrès(centre, out Vector3 proche) ? proche : centre;
-            ennemis.Add(Instantiate(prefab, pos, Quaternion.identity));
+            var e = Instantiate(prefab, pos, Quaternion.identity);
+
+            var stats = e.GetComponent<EnemyStats>();
+            if (stats != null) stats.SetBaseSpeed(Random.Range(vitesseMin, vitesseMax));
+
+            ennemis.Add(e);
         }
     }
 
