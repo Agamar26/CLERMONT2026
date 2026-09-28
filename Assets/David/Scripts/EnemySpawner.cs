@@ -32,11 +32,11 @@ public class EnemySpawner : MonoBehaviour
     private Camera cam;
     private float nextSpawnTime;
     private int vague;
+    private bool actif;
 
     void Start()
     {
         cam = Camera.main;
-        nextSpawnTime = Time.time + spawnInterval;
         prochaineVagueBoss = premiereVagueBoss;
     }
 
@@ -47,6 +47,24 @@ public class EnemySpawner : MonoBehaviour
         {
             bossVivant = false;
             prochaineVagueBoss = vague + vaguesApresMort;
+        }
+
+        // Le spawn ne tourne que si le joueur est dans la zone
+        bool joueurDedans = player.instance != null &&
+                            limites.OverlapPoint(player.instance.transform.position);
+
+        if (!joueurDedans)
+        {
+            actif = false;
+            return;
+        }
+
+        // Entrée dans la zone : le chrono démarre maintenant
+        if (!actif)
+        {
+            actif = true;
+            nextSpawnTime = Time.time + spawnInterval;
+            return;
         }
 
         if (Time.time < nextSpawnTime) return;

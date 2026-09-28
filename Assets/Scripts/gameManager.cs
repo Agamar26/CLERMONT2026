@@ -21,6 +21,8 @@ public class gameManager : MonoBehaviour
     public GameObject doors;
     public Image FrostBar;
     public bool CourseOk = false;
+    public bool magasinADroite = true;   // true si l'intérieur du magasin est à droite de la porte
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,22 +42,21 @@ public class gameManager : MonoBehaviour
             objCoursesToGetTaken.Add(false);
             var ezez = Instantiate(prefMissionUI, containeruitasks.transform);
             ezez.GetComponentInChildren<TextMeshProUGUI>().text = $"{debutmessagemission} {objCourses[zae]}";
-           objCoursesToGetTakenUI.Add(ezez);
+            objCoursesToGetTakenUI.Add(ezez);
         }
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
         int dffd = 0;
-        for(int i = 0;i < objCoursesToGetTaken.Count;i++)
+        for (int i = 0; i < objCoursesToGetTaken.Count; i++)
         {
-            if(objCoursesToGetTaken[i])
+            if (objCoursesToGetTaken[i])
             {
                 dffd++;
                 objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
@@ -63,38 +64,27 @@ public class gameManager : MonoBehaviour
             else
             {
                 objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-            }  
+            }
         }
-        var dds = Physics2D.OverlapCircle(doors.transform.position, radiusdetectplayer, layerPlayer);
-        if (dffd == numberOfTasks)
-        {
-            CourseOk = true;
 
-            if (dds)
-            {
-                doors.GetComponent<Animator>().SetBool("Open", true);
-            }
-            else
-            {
-                doors.GetComponent<Animator>().SetBool("Open", false);
-            }
-        }
-        else
-        {
-            if(dds)
-            {
-                textInteraction.GetComponent<TextMeshProUGUI>().enabled = true;
-                textInteraction.GetComponent<TextMeshProUGUI>().text = "Recuperez toutes les courses avant de sortir";
-            }
-            else
-            {
-                textInteraction.GetComponent<TextMeshProUGUI>().enabled = false;
-            }
-            
-        }
+        var dds = Physics2D.OverlapCircle(doors.transform.position, radiusdetectplayer, layerPlayer);
+
+        bool aDroite = player.instance.transform.position.x > doors.transform.position.x;
+        bool dedans = magasinADroite ? aDroite : !aDroite;
+
+        CourseOk = dffd == numberOfTasks;
+
+        // Dehors : on peut toujours entrer. Dedans : il faut avoir toutes les courses.
+        bool peutOuvrir = !dedans || CourseOk;
+        doors.GetComponent<Animator>().SetBool("Open", dds && peutOuvrir);
+
+        bool bloque = dds && dedans && !CourseOk;
+        textInteraction.enabled = bloque;
+        if (bloque) textInteraction.text = "Recuperez toutes les courses avant de sortir";
+
         FrostBar.fillAmount = player.instance.timerbarFrost / player.instance.timeBarFrost;
-        
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

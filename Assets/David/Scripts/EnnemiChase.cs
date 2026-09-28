@@ -18,6 +18,7 @@ public class EnnemiChase : MonoBehaviour
         agent.enabled = true;
     }
 
+   
     void Update()
     {
         if (player.instance == null) return;
