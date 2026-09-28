@@ -9,7 +9,7 @@ public class SimpleSceneCharger : MonoBehaviour
     {
         if(collision.CompareTag("Player"))
         {
-            SceneManager.LoadScene(sceneName);
+            Fondu.Charger(sceneName);
         }
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class RaceManager : MonoBehaviour
@@ -66,7 +65,7 @@ public class RaceManager : MonoBehaviour
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(delaiAvantChargement);
         Time.timeScale = 1f;
-        SceneManager.LoadScene(scene);
+        Fondu.Charger(scene);
     }
 
     private void FinDeCourse()
@@ -76,10 +75,10 @@ public class RaceManager : MonoBehaviour
         foreach (var go in aDesactiver)
             if (go != null) go.SetActive(false);
 
-        if (musique != null) StartCoroutine(Fondu());
+        if (musique != null) StartCoroutine(FonduMusique());
     }
 
-    private IEnumerator Fondu()
+    private IEnumerator FonduMusique()
     {
         float volumeDepart = musique.volume;
         float t = 0f;

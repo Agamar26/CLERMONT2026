@@ -32,7 +32,7 @@ public class MenuPrincipal : MonoBehaviour
     public void Jouer()
     {
         PlayerPrefs.Save();
-        SceneManager.LoadScene(sceneJeu);
+        Fondu.Charger(sceneJeu);
     }
 
     public void Options() => Afficher(panelOptions, premierOptions);

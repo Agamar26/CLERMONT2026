@@ -57,7 +57,7 @@ public class MenuPause : MonoBehaviour
     public void RetourMenu()
     {
         Reprendre();   // remet timeScale à 1 avant de changer de scène
-        SceneManager.LoadScene(sceneMenu);
+        Fondu.Charger(sceneMenu);
     }
 
     public void Quitter()
