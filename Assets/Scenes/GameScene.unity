@@ -1784,6 +1784,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1455515502}
     m_Modifications:
+    - target: {fileID: 4872203159051055455, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6079667705521890154, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
       propertyPath: m_Name
       value: Allee_Pleine_0 (16)
@@ -2173,6 +2177,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1455515502}
     m_Modifications:
+    - target: {fileID: 4872203159051055455, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
+      propertyPath: m_SortingOrder
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6079667705521890154, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
       propertyPath: m_Name
       value: Allee_Pleine_0 (3)
@@ -4002,6 +4010,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1455515502}
     m_Modifications:
+    - target: {fileID: 4872203159051055455, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
+      propertyPath: m_SortingOrder
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 6079667705521890154, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
       propertyPath: m_Name
       value: Allee_Pleine_0 (4)
@@ -5390,6 +5402,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1455515502}
     m_Modifications:
+    - target: {fileID: 4872203159051055455, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6079667705521890154, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
       propertyPath: m_Name
       value: Allee_Pleine_0 (17)
