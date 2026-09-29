@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 49b8b411ff0afd54cb1903bad187c477
+guid: 6c55144e5842a954c93105234d1a7197
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7342826633904048550
-    second: PanneauParking_0
+      213: 8434725330008855768
+    second: sketch1790682075148_0
+  - first:
+      213: 8514586393934590912
+    second: sketch1790682075148_1
+  - first:
+      213: -1721620509245515841
+    second: sketch1790682075148_2
+  - first:
+      213: 2356732737746237579
+    second: sketch1790682075148_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,13 +124,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PanneauParking_0
+      name: sketch1790682075148_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 35
-        width: 917
-        height: 882
+        x: 137
+        y: 532
+        width: 681
+        height: 520
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +139,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a9c0296be5f6e560800000000000000
-      internalID: 7342826633904048550
+      spriteID: 8d4da21aff92e0570800000000000000
+      internalID: 8434725330008855768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sketch1790682075148_1
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 651
+        width: 328
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c378db8633e92670800000000000000
+      internalID: 8514586393934590912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sketch1790682075148_2
+      rect:
+        serializedVersion: 2
+        x: 1262
+        y: 935
+        width: 334
+        height: 152
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb7d464b4439b18e0800000000000000
+      internalID: -1721620509245515841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sketch1790682075148_3
+      rect:
+        serializedVersion: 2
+        x: 886
+        y: 435
+        width: 278
+        height: 145
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b88f5ef30fbc4b020800000000000000
+      internalID: 2356732737746237579
       vertices: []
       indices: 
       edges: []
@@ -140,7 +215,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6b99fd2aa033c234287fcf2191147f2d
+    spriteID: 4f826a3c3666c5547b55de4cfbc2b0be
     internalID: 0
     vertices: []
     indices: 
@@ -150,7 +225,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PanneauParking_0: 7342826633904048550
+      sketch1790682075148_0: 8434725330008855768
+      sketch1790682075148_1: 8514586393934590912
+      sketch1790682075148_2: -1721620509245515841
+      sketch1790682075148_3: 2356732737746237579
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

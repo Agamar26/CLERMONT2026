@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 49b8b411ff0afd54cb1903bad187c477
+guid: cc0583b89e0d317448079e4adf416388
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7342826633904048550
-    second: PanneauParking_0
+      213: 1396705927145596561
+    second: Fleche_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -115,23 +115,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PanneauParking_0
+      name: Fleche_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 35
-        width: 917
-        height: 882
+        x: 285
+        y: 298
+        width: 493
+        height: 461
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a9c0296be5f6e560800000000000000
-      internalID: 7342826633904048550
+      spriteID: 196223304a8126310800000000000000
+      internalID: 1396705927145596561
       vertices: []
       indices: 
       edges: []
@@ -140,7 +140,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6b99fd2aa033c234287fcf2191147f2d
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -150,7 +150,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      PanneauParking_0: 7342826633904048550
+      Fleche_0: 1396705927145596561
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
