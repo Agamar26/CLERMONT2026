@@ -59,6 +59,7 @@ public class EnemyStats : MonoBehaviour
     public void SetBaseSpeed(float value)
     {
         baseSpeed = Mathf.Max(value, 0f);
+        speeddebase = baseSpeed;
         RecalculerVitesse();
     }
 
