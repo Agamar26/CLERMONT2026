@@ -127,12 +127,12 @@ TextureImporter:
       name: sketch1790664141839_0
       rect:
         serializedVersion: 2
-        x: 327
-        y: 1304
-        width: 530
-        height: 400
+        x: 44
+        y: 1446
+        width: 542
+        height: 417
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -149,12 +149,12 @@ TextureImporter:
       name: sketch1790664141839_1
       rect:
         serializedVersion: 2
-        x: 549
-        y: 864
-        width: 572
-        height: 595
+        x: 586
+        y: 1052
+        width: 601
+        height: 642
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -176,7 +176,7 @@ TextureImporter:
         width: 453
         height: 561
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -193,12 +193,12 @@ TextureImporter:
       name: sketch1790664141839_3
       rect:
         serializedVersion: 2
-        x: 324
-        y: 402
-        width: 540
-        height: 406
+        x: 507
+        y: 219
+        width: 553
+        height: 425
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -215,7 +215,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a03806dc607efe2498976acef69c0d5e
     internalID: 0
     vertices: []
     indices: 
