@@ -46,9 +46,23 @@ public class player : MonoBehaviour
     public Transform eyePos;
     public float timerbarFrost, timeBarFrost;
 
-    private Coroutine deguisement;
+    [System.Serializable]
+    public class SonEtat
+    {
+        public playerstate etat;
+        public AudioClip clip;
+        public bool boucle = true;
+        [Range(0f, 1f)] public float volume = 1f;
+    }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Sons par état (un état sans entrée = silence)")]
+    public AudioSource audioSource;
+    public List<SonEtat> sonsEtats = new List<SonEtat>();
+
+    private Coroutine deguisement;
+    private playerstate etatPrecedent;
+    private bool etatInitialise;
+
     void Start()
     {
         Time.timeScale = 1f;
@@ -57,9 +71,9 @@ public class player : MonoBehaviour
             instance = this;
         }
 
+        if (audioSource != null) audioSource.playOnAwake = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (instance == null)
@@ -202,6 +216,32 @@ public class player : MonoBehaviour
 
             case playerstate.launch:
                 break;
+        }
+
+        UpdateSonEtat();
+    }
+
+    // Détecte chaque changement d'état (même fait par un autre script) :
+    // coupe le son de l'ancien état et lance celui du nouveau.
+    private void UpdateSonEtat()
+    {
+        if (audioSource == null) return;
+        if (etatInitialise && state == etatPrecedent) return;
+
+        etatPrecedent = state;
+        etatInitialise = true;
+
+        audioSource.Stop();
+
+        foreach (var s in sonsEtats)
+        {
+            if (s.etat != state || s.clip == null) continue;
+
+            audioSource.clip = s.clip;
+            audioSource.loop = s.boucle;
+            audioSource.volume = s.volume;
+            audioSource.Play();
+            break;
         }
     }
 

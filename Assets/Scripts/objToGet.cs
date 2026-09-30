@@ -4,19 +4,16 @@ public class objToGet : MonoBehaviour
 {
     public string nameOfObj;
 
+    [HideInInspector] public int indexCourse = -1;   // rempli par CourseSpawner, -1 = objet hors liste
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Player")) return;
+        if (indexCourse < 0 || !collision.CompareTag("Player")) return;
 
         var gm = gameManager.instance;
-        for (int i = 0; i < gm.objCoursesToGet.Count; i++)
-        {
-            if (!gm.objCoursesToGetTaken[i] && gm.objCoursesToGet[i].Contains(nameOfObj))
-            {
-                gm.objCoursesToGetTaken[i] = true;
-                Destroy(gameObject);
-                return;
-            }
-        }
+        if (gm.objCoursesToGetTaken[indexCourse]) return;
+
+        gm.objCoursesToGetTaken[indexCourse] = true;
+        Destroy(gameObject);
     }
 }
