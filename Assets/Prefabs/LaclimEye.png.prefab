@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1914834133220252992}
   m_Layer: 0
   m_Name: LaclimEye.png
-  m_TagString: Untagged
+  m_TagString: Oeil
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

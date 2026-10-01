@@ -42,8 +42,7 @@ public class gameManager : MonoBehaviour
         // Remplit la flèche automatiquement si les champs sont vides
         if (fleche != null)
         {
-            if (fleche.sortie == null) fleche.sortie = doors.transform;
-            if (fleche.joueur == null) fleche.joueur = player.instance.transform;
+            if (fleche.cible == null) fleche.cible = doors.transform;
         }
 
         // Évite une boucle infinie si on demande plus d'articles qu'il n'en existe

@@ -46,6 +46,10 @@ public class player : MonoBehaviour
     public Transform eyePos;
     public float timerbarFrost, timeBarFrost;
 
+    [Header("Flèche vers l'œil lancé")]
+    public FlecheObjectif flecheOeil;
+    public string tagOeil = "Oeil";
+
     [System.Serializable]
     public class SonEtat
     {
@@ -72,6 +76,7 @@ public class player : MonoBehaviour
         }
 
         if (audioSource != null) audioSource.playOnAwake = false;
+        if (flecheOeil != null && flecheOeil.joueur == null) flecheOeil.joueur = transform;
     }
 
     void Update()
@@ -219,6 +224,29 @@ public class player : MonoBehaviour
         }
 
         UpdateSonEtat();
+        UpdateFlecheOeil();
+    }
+
+    // La flèche suit le flag donthaveEye : active tant que l'œil est lancé, coupée une fois récupéré.
+    private void UpdateFlecheOeil()
+    {
+        if (flecheOeil == null) return;
+
+        if (!donthaveEye)
+        {
+            flecheOeil.Desactiver();
+            return;
+        }
+
+        // Cherche l'œil une seule fois par lancer (ou à nouveau s'il a été détruit puis recréé)
+        if (flecheOeil.cible == null)
+        {
+            GameObject oeil = GameObject.FindWithTag(tagOeil);
+            if (oeil == null) return;
+            flecheOeil.cible = oeil.transform;
+        }
+
+        flecheOeil.Activer();
     }
 
     // Détecte chaque changement d'état (même fait par un autre script) :

@@ -1,13 +1,15 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class FlecheObjectif : MonoBehaviour
 {
     public Transform joueur;
-    public Transform sortie;
+    [FormerlySerializedAs("sortie")]
+    public Transform cible;
     public float distance = 1.5f;              // écart entre le joueur et la flèche
     public float vitesseClignotement = 4f;
-    public float distanceMasquage = 2f;        // la flèche disparaît quand le joueur est proche de la sortie
+    public float distanceMasquage = 2f;        // la flèche disparaît quand le joueur est proche de la cible
 
     private SpriteRenderer sr;
     private bool active;
@@ -18,8 +20,9 @@ public class FlecheObjectif : MonoBehaviour
         sr.enabled = false;
     }
 
-    public void Activer()
+    public void Activer(Transform nouvelleCible = null)
     {
+        if (nouvelleCible != null) cible = nouvelleCible;
         active = true;
     }
 
@@ -31,9 +34,16 @@ public class FlecheObjectif : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!active || joueur == null || sortie == null) return;
+        // Cible détruite ou désactivée : on l'oublie et on cache la flèche
+        if (cible != null && !cible.gameObject.activeInHierarchy) cible = null;
 
-        Vector2 delta = sortie.position - joueur.position;
+        if (!active || joueur == null || cible == null)
+        {
+            sr.enabled = false;
+            return;
+        }
+
+        Vector2 delta = cible.position - joueur.position;
         sr.enabled = delta.magnitude > distanceMasquage;
         if (!sr.enabled) return;
 
