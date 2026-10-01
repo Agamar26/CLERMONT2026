@@ -23,6 +23,7 @@ public class gameManager : MonoBehaviour
     public bool CourseOk = false;
     public bool magasinADroite = true;   // true si l'intérieur du magasin est à droite de la porte
     public float delaiFermeture = 0.5f;  // la porte reste ouverte ce temps après le passage
+    public FlecheObjectif fleche;        // flèche vers la sortie
 
     private bool dedansMemorise;         // côté d'où le joueur arrive, figé tant qu'il est dans la zone
     private float timerFermeture;
@@ -37,6 +38,13 @@ public class gameManager : MonoBehaviour
         }
 
         doorAnimator = doors.GetComponent<Animator>();
+
+        // Remplit la flèche automatiquement si les champs sont vides
+        if (fleche != null)
+        {
+            if (fleche.sortie == null) fleche.sortie = doors.transform;
+            if (fleche.joueur == null) fleche.joueur = player.instance.transform;
+        }
 
         // Évite une boucle infinie si on demande plus d'articles qu'il n'en existe
         if (numberOfTasks > objCourses.Count)
@@ -80,12 +88,20 @@ public class gameManager : MonoBehaviour
             }
         }
 
+        bool etaitOk = CourseOk;
         CourseOk = dffd == numberOfTasks;
 
         bool dds = Physics2D.OverlapCircle(doors.transform.position, radiusdetectplayer, layerPlayer);
 
         bool aDroite = player.instance.transform.position.x > doors.transform.position.x;
         bool dedansActuel = magasinADroite ? aDroite : !aDroite;
+
+        // Courses terminées : on montre la sortie. Joueur sorti : objectif atteint.
+        if (fleche != null)
+        {
+            if (CourseOk && !etaitOk) fleche.Activer();
+            if (CourseOk && !dedansActuel && !dds) fleche.Desactiver();
+        }
 
         // Hors zone : on suit le côté réel.
         // Dans la zone : on garde le côté d'arrivée, pour ne pas refermer la porte en plein passage.
