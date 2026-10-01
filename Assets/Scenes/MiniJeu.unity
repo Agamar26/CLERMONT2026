@@ -1479,7 +1479,7 @@ MonoBehaviour:
   - -1
   - 1
   - 3
-  vitesseDecor: 5
+  vitesseDecor: 8
   dureeTrajet: 30
   routeLibreAvantArrivee: 7
   musique: {fileID: 1927126907}
