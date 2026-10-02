@@ -2399,9 +2399,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 785012334}
     - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
+      propertyPath: maxEnemies
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
       propertyPath: enemyPrefabs.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
+      propertyPath: 'enemyPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4842551230446721556, guid: 9657340fa9bcd404a9d70bf15eef86fe, type: 3}
     - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[1]'
       value: 
@@ -13763,18 +13771,6 @@ PrefabInstance:
     - target: {fileID: 4842551230446721556, guid: 9657340fa9bcd404a9d70bf15eef86fe, type: 3}
       propertyPath: m_Name
       value: KgolLACLIM1790924267 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6051759807598363255, guid: 9657340fa9bcd404a9d70bf15eef86fe, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 6051759807598363255, guid: 9657340fa9bcd404a9d70bf15eef86fe, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.28
-      objectReference: {fileID: 0}
-    - target: {fileID: 6051759807598363255, guid: 9657340fa9bcd404a9d70bf15eef86fe, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 6051759807598363255, guid: 9657340fa9bcd404a9d70bf15eef86fe, type: 3}
       propertyPath: m_LocalPosition.x
