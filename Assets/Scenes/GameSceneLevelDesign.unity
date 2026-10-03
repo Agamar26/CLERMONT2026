@@ -2841,6 +2841,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8790407277625511169, guid: cac34fbbec5663f4584bf52789f5bc88, type: 3}
   m_PrefabInstance: {fileID: 349119481}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &360575237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4208517448937999842, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+  m_PrefabInstance: {fileID: 1885437199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!4 &363730526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2808541347175831700, guid: eebd59eb0aa432443b091cff690d7ca2, type: 3}
@@ -5951,7 +5962,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -5975410781428772683, guid: 85f1313a975287c419c12fb11753cb39, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: d68bbcf36aa347142bd86fe15009c471, type: 3}
+  m_Resource: {fileID: 8300000, guid: 80d79115fc161814e9528e34d743a861, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.459
   m_Pitch: 1
@@ -10453,6 +10464,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 951886218091445404, guid: c464b4ac7a576a945acd96af2147d374, type: 3}
   m_PrefabInstance: {fileID: 1774449654}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1262901301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1785365779724564696, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+  m_PrefabInstance: {fileID: 1885437199}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1001 &1268092504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13648,10 +13670,10 @@ PrefabInstance:
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: FrostBar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 360575237}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: numberOfTasks
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: prefMissionUI
@@ -13660,7 +13682,7 @@ PrefabInstance:
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: textInteraction
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1262901301}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: containeruitasks
       value: 
@@ -13675,7 +13697,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: debutmessagemission
-      value: 
+      value: Trouver et ramener
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: objCourses.Array.size
@@ -13683,15 +13705,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[0]'
-      value: Une orange
+      value: une Orange
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[1]'
-      value: Un sandwich triangle
+      value: un Sandwich Triangle
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[2]'
-      value: Des chaussettes
+      value: des Chaussettes
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[3]'
@@ -13699,11 +13721,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[4]'
-      value: Un fromage
+      value: Un Fromage
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[5]'
-      value: Une tomate
+      value: Une Tomate
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[6]'
@@ -13711,23 +13733,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[7]'
-      value: Du Jac'Clim
+      value: Jac'Clim
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[8]'
-      value: Du Papy Boost
+      value: Papy Boost
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[9]'
-      value: Des bananes
+      value: Bananes
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[10]'
-      value: Des clopes
+      value: Clopes
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[11]'
-      value: Une canette Redgoat
+      value: RedGoat
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: 'objCourses.Array.data[12]'
@@ -16747,7 +16769,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5280249171020128493, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
       propertyPath: m_Name
-      value: Canvas (1)
+      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 7288724011834110783, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
       propertyPath: m_Pivot.x
