@@ -166,6 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::objToGet
   nameOfObj: Orange
+  sonRamassage: {fileID: 8300000, guid: 3d7d1f5cce381634b92eec3832b91a53, type: 3}
+  volume: 1
+  indexCourse: -1
 --- !u!58 &7565474727560607581
 CircleCollider2D:
   m_ObjectHideFlags: 0

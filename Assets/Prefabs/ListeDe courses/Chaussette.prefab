@@ -109,6 +109,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   nameOfObj: Chaussettes
+  sonRamassage: {fileID: 8300000, guid: 3d7d1f5cce381634b92eec3832b91a53, type: 3}
+  volume: 1
+  indexCourse: -1
 --- !u!60 &1044386162614516823
 PolygonCollider2D:
   m_ObjectHideFlags: 0

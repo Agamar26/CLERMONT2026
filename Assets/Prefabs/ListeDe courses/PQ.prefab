@@ -217,6 +217,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   nameOfObj: PQ
+  sonRamassage: {fileID: 8300000, guid: 3d7d1f5cce381634b92eec3832b91a53, type: 3}
+  volume: 1
+  indexCourse: -1
 --- !u!70 &4569949342515670446
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
