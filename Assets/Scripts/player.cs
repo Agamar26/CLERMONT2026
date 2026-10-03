@@ -46,6 +46,9 @@ public class player : MonoBehaviour
     [Range(0f, 1f)] public float facteurGel = 0.3f; // 0.3 = 30 % de la vitesse
     public float dureeGel = 2f;
 
+    [Header("Caddie")]
+    public float rayonCaddie = 1f;
+
     [Header("Flèche vers l'œil lancé")]
     public FlecheObjectif flecheOeil;
     public string tagOeil = "Oeil";
@@ -130,6 +133,8 @@ public class player : MonoBehaviour
                 speed = speedBonus;
                 caddie.SetActive(true);
                 animatorClim.SetBool("Run", false);
+                EcraserEnnemis();
+
                 if (bonusTimer != bonusTime)
                 {
                     bonusTimer = Mathf.MoveTowards(bonusTimer, bonusTime, Time.deltaTime);
@@ -166,6 +171,17 @@ public class player : MonoBehaviour
         launchdirection = derniereDirection;
         OrienterBras(launchdirection);
         animatorClim.SetTrigger("Launch");
+    }
+
+    // --- Caddie : détruit tout ennemi touché ---
+
+    private void EcraserEnnemis()
+    {
+        foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, rayonCaddie))
+        {
+            EnemyStats ennemi = col.GetComponentInParent<EnemyStats>();
+            if (ennemi != null && !ennemi.IsDead) ennemi.TakeDamage(ennemi.Health);
+        }
     }
 
     // --- Gel de zone ---
@@ -339,5 +355,8 @@ public class player : MonoBehaviour
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, rayonGel);
+
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireSphere(transform.position, rayonCaddie);
     }
 }
