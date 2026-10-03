@@ -44,6 +44,8 @@ public class player : MonoBehaviour
     [Header("Vie")]
     public float rayonContact = 0.5f;
     public float dureeInvulnerabilite = 1f;
+    public Color couleurDegats = new Color(1f, 0.3f, 0.3f);
+    public float frequenceClignotement = 10f;
     public System.Action OnMort;
 
     [Header("Gel de zone")]
@@ -77,6 +79,9 @@ public class player : MonoBehaviour
     private bool etatInitialise;
     private Vector2 derniereDirection = Vector2.right;
     private float invulTimer;
+    private SpriteRenderer[] sprites;
+    private Color[] couleursOrigine;
+    private bool clignoteRouge;
 
     void Start()
     {
@@ -85,6 +90,10 @@ public class player : MonoBehaviour
 
         if (audioSource != null) audioSource.playOnAwake = false;
         if (flecheOeil != null && flecheOeil.joueur == null) flecheOeil.joueur = transform;
+
+        sprites = GetComponentsInChildren<SpriteRenderer>(true);
+        couleursOrigine = new Color[sprites.Length];
+        for (int i = 0; i < sprites.Length; i++) couleursOrigine[i] = sprites[i].color;
     }
 
     void Update()
@@ -164,6 +173,12 @@ public class player : MonoBehaviour
         UpdateFlecheOeil();
     }
 
+    // Après l'Animator : la teinte n'est pas écrasée par les anims
+    void LateUpdate()
+    {
+        UpdateClignotement();
+    }
+
     // --- Vie ---
 
     private void VerifierContacts()
@@ -187,6 +202,7 @@ public class player : MonoBehaviour
 
         health = Mathf.Max(health - amount, 0f);
         invulTimer = dureeInvulnerabilite;
+        Debug.Log($"Joueur touché : -{amount} → {health}/{maxHealth}");
 
         if (EstMort) Mourir();
         else animatorClim.SetTrigger("Hurt");
@@ -204,6 +220,23 @@ public class player : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         animatorClim.SetTrigger("Death");
         OnMort?.Invoke();
+    }
+
+    private void UpdateClignotement()
+    {
+        if (invulTimer > 0f)
+        {
+            bool rouge = Mathf.Repeat(invulTimer * frequenceClignotement, 1f) > 0.5f;
+            for (int i = 0; i < sprites.Length; i++)
+                sprites[i].color = rouge ? couleurDegats : couleursOrigine[i];
+            clignoteRouge = true;
+        }
+        else if (clignoteRouge)
+        {
+            for (int i = 0; i < sprites.Length; i++)
+                sprites[i].color = couleursOrigine[i];
+            clignoteRouge = false;
+        }
     }
 
     // --- Lancer de l'œil : tout droit dans la dernière direction de déplacement ---

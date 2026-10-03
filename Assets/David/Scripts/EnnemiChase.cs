@@ -5,14 +5,12 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnnemiChase : MonoBehaviour
 {
-    private enum State { Idle, Chase, Stun, Die }
+    private enum State { Idle, Chase, Photo, Stun, Die }
 
     [Header("Références")]
-    [SerializeField] private Transform visuel;      // le FBX enfant (sinon l'objet lui-même)
+    [SerializeField] private Transform visuel;      // le modèle enfant (sinon l'objet lui-même)
     [SerializeField] private Animator animator;     // sinon cherché dans les enfants
-    [SerializeField] private float degatsContact;
-    public float DegatsContact => degatsContact;
-    public bool PeutBlesser => gelTimer <=0f && state != State.Die;
+
     [Header("Angle Y du modèle")]
     [SerializeField] private float angleDroite = 90f;
     [SerializeField] private float angleGauche = -90f;
@@ -21,10 +19,15 @@ public class EnnemiChase : MonoBehaviour
     [SerializeField] private float rayonDetection = 8f;
     [SerializeField] private float rayonPerte = 11f;
 
+    [Header("Photo au contact (écart entre les colliders)")]
+    [SerializeField] private float distancePhoto = 0.2f;
+    [SerializeField] private float margePhoto = 0.3f; // évite d'alterner Photo/Chase à la limite
+
     [Header("Noms des states dans l'Animator")]
     [SerializeField] private string stateIdle = "Idle";
     [SerializeField] private string stateChase = "Chase";
-    [SerializeField] private string stateStun = "Stun";
+    [SerializeField] private string statePhoto = "Photo";
+    [SerializeField] private string stateStun = "Idle"; // pas d'état Stun dans l'Animator
     [SerializeField] private string stateDie = "Die";
     [SerializeField] private float fondu = 0.1f;
 
@@ -32,22 +35,21 @@ public class EnnemiChase : MonoBehaviour
     [SerializeField] private Color couleurGel = new Color(0.4f, 0.7f, 1f);
     [SerializeField, Range(0f, 1f)] private float intensiteGel = 0.7f;
 
-    private static readonly int idBaseColor = Shader.PropertyToID("_BaseColor"); // URP
-    private static readonly int idColor = Shader.PropertyToID("_Color");         // Built-in
+    [Header("Dégâts au contact")]
+    [SerializeField] private float degatsContact = 10f;
 
-    private struct MatCouleur
-    {
-        public Material mat;
-        public int prop;
-        public Color origine;
-    }
+    public float DegatsContact => degatsContact;
+    public bool PeutBlesser => gelTimer <= 0f && state != State.Die;
 
     private NavMeshAgent agent;
     private State state;
     private float stunTimer;
     private float gelTimer;
     private float vitesseAnimAvantGel = 1f;
-    private readonly List<MatCouleur> materiaux = new List<MatCouleur>();
+    private SpriteRenderer[] sprites;
+    private Color[] couleursOrigine;
+    private Collider2D monCollider;
+    private Collider2D colliderJoueur;
 
     void Awake()
     {
@@ -60,23 +62,22 @@ public class EnnemiChase : MonoBehaviour
 
         if (visuel == null) visuel = transform;
         if (animator == null) animator = GetComponentInChildren<Animator>();
-
-        // Matériaux du modèle 3D uniquement (la barre de vie, en sprites, n'est pas teintée)
-        foreach (Renderer r in GetComponentsInChildren<Renderer>(true))
-        {
-            if (!(r is MeshRenderer || r is SkinnedMeshRenderer)) continue;
-
-            foreach (Material m in r.materials)
-            {
-                int prop = m.HasProperty(idBaseColor) ? idBaseColor : m.HasProperty(idColor) ? idColor : -1;
-                if (prop == -1) continue;
-                materiaux.Add(new MatCouleur { mat = m, prop = prop, origine = m.GetColor(prop) });
-            }
-        }
+        monCollider = GetComponentInChildren<Collider2D>();
     }
 
     void Start()
     {
+        // Récupérés en Start : la barre de vie (créée en Awake) existe déjà et peut être exclue
+        var liste = new List<SpriteRenderer>();
+        foreach (SpriteRenderer sr in visuel.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            if (sr.transform.parent != null && sr.transform.parent.name == "BarreVie") continue;
+            liste.Add(sr);
+        }
+        sprites = liste.ToArray();
+        couleursOrigine = new Color[sprites.Length];
+        for (int i = 0; i < sprites.Length; i++) couleursOrigine[i] = sprites[i].color;
+
         SetState(State.Idle);
     }
 
@@ -103,8 +104,26 @@ public class EnnemiChase : MonoBehaviour
                     break;
                 }
                 Vector3 playerPos = player.instance.transform.position;
-                agent.SetDestination(playerPos);
                 Orienter(playerPos.x - transform.position.x);
+
+                float d = DistanceJoueur();
+                if (d < 1f) Debug.Log($"{name} écart = {d:0.00}", this);
+                if (DistanceJoueur() <= distancePhoto)
+                {
+                    SetState(State.Photo);
+                    break;
+                }
+                agent.SetDestination(playerPos);
+                break;
+
+            case State.Photo:
+                if (!JoueurDetecte())
+                {
+                    SetState(State.Idle);
+                    break;
+                }
+                Orienter(player.instance.transform.position.x - transform.position.x);
+                if (DistanceJoueur() > distancePhoto + margePhoto) SetState(State.Chase);
                 break;
 
             case State.Stun:
@@ -143,6 +162,17 @@ public class EnnemiChase : MonoBehaviour
 
     // --- Interne ---
 
+    // Écart entre les bords des colliders (négatif s'ils se chevauchent), sinon distance entre centres
+    private float DistanceJoueur()
+    {
+        if (colliderJoueur == null) colliderJoueur = player.instance.GetComponent<Collider2D>();
+
+        if (monCollider != null && colliderJoueur != null && monCollider.enabled && colliderJoueur.enabled)
+            return monCollider.Distance(colliderJoueur).distance;
+
+        return Vector2.Distance(transform.position, player.instance.transform.position);
+    }
+
     private void DebutGel()
     {
         agent.isStopped = true;
@@ -167,10 +197,11 @@ public class EnnemiChase : MonoBehaviour
 
     private void Teinter(bool gele)
     {
-        foreach (MatCouleur mc in materiaux)
+        if (sprites == null) return;
+
+        for (int i = 0; i < sprites.Length; i++)
         {
-            Color c = gele ? Color.Lerp(mc.origine, couleurGel, intensiteGel) : mc.origine;
-            mc.mat.SetColor(mc.prop, c);
+            sprites[i].color = gele ? Color.Lerp(couleursOrigine[i], couleurGel, intensiteGel) : couleursOrigine[i];
         }
     }
 
@@ -179,7 +210,8 @@ public class EnnemiChase : MonoBehaviour
         if (player.instance == null) return false;
         if (rayonDetection <= 0f) return true;
 
-        float r = state == State.Chase ? rayonPerte : rayonDetection;
+        bool engage = state == State.Chase || state == State.Photo;
+        float r = engage ? rayonPerte : rayonDetection;
         Vector3 delta = player.instance.transform.position - transform.position;
         return delta.sqrMagnitude <= r * r;
     }
@@ -196,7 +228,11 @@ public class EnnemiChase : MonoBehaviour
 
         bool mobile = nouveau == State.Chase;
         agent.isStopped = !mobile;
-        if (!mobile) agent.ResetPath();
+        if (!mobile)
+        {
+            agent.ResetPath();
+            agent.velocity = Vector3.zero;
+        }
 
         if (animator == null) return;
 
@@ -204,6 +240,7 @@ public class EnnemiChase : MonoBehaviour
         {
             State.Idle => stateIdle,
             State.Chase => stateChase,
+            State.Photo => statePhoto,
             State.Stun => stateStun,
             _ => stateDie
         };

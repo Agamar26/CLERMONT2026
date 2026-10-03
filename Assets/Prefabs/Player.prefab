@@ -3859,9 +3859,11 @@ MonoBehaviour:
   eyePos: {fileID: 510025110801524475}
   timerbarFrost: 3
   timeBarFrost: 3
-  rayonContact: 0.5
+  rayonContact: 0.92
   dureeInvulnerabilite: 1
-  rayonGel: 3
+  couleurDegats: {r: 1, g: 0.3, b: 0.3, a: 1}
+  frequenceClignotement: 10
+  rayonGel: 5
   dureeGel: 3
   rayonCaddie: 1
   flecheOeil: {fileID: 0}

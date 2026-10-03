@@ -3270,17 +3270,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2107669150}
     - target: {fileID: 7902476785784029509, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
-      propertyPath: rayonGel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7902476785784029509, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
       propertyPath: flecheOeil
       value: 
       objectReference: {fileID: 104128944}
-    - target: {fileID: 7902476785784029509, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
-      propertyPath: rayonContact
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
