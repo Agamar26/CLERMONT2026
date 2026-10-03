@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     public float radiusdetectplayer;
     public GameObject doors;
     public Image FrostBar;
+    public Image lifeBar;
     public bool CourseOk = false;
     public bool magasinADroite = true;   // true si l'intérieur du magasin est à droite de la porte
     public float delaiFermeture = 0.5f;  // la porte reste ouverte ce temps après le passage
@@ -73,6 +74,9 @@ public class gameManager : MonoBehaviour
         {
             instance = this;
         }
+
+        lifeBar.fillAmount = player.instance.health / player.instance.maxHealth;
+
         int dffd = 0;
         for (int i = 0; i < objCoursesToGetTaken.Count; i++)
         {
