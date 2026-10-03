@@ -90,6 +90,7 @@ public class EnemyStats : MonoBehaviour
         float v = baseSpeed;
         foreach (float m in modificateurs) v *= m * gameManager.instance.animatorSpeed;
         agent.speed = v;
+        Debug.Log($"{name} vitesse = {agent.speed}");
     }
 
     // --- Mort ---

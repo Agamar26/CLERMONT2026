@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,9 +26,26 @@ public class EnnemiChase : MonoBehaviour
     [SerializeField] private string stateDie = "Die";
     [SerializeField] private float fondu = 0.1f;
 
+    [Header("Gel")]
+    [SerializeField] private Color couleurGel = new Color(0.4f, 0.7f, 1f);
+    [SerializeField, Range(0f, 1f)] private float intensiteGel = 0.7f;
+
+    private static readonly int idBaseColor = Shader.PropertyToID("_BaseColor"); // URP
+    private static readonly int idColor = Shader.PropertyToID("_Color");         // Built-in
+
+    private struct MatCouleur
+    {
+        public Material mat;
+        public int prop;
+        public Color origine;
+    }
+
     private NavMeshAgent agent;
     private State state;
     private float stunTimer;
+    private float gelTimer;
+    private float vitesseAnimAvantGel = 1f;
+    private readonly List<MatCouleur> materiaux = new List<MatCouleur>();
 
     void Awake()
     {
@@ -40,6 +58,19 @@ public class EnnemiChase : MonoBehaviour
 
         if (visuel == null) visuel = transform;
         if (animator == null) animator = GetComponentInChildren<Animator>();
+
+        // Matériaux du modèle 3D uniquement (la barre de vie, en sprites, n'est pas teintée)
+        foreach (Renderer r in GetComponentsInChildren<Renderer>(true))
+        {
+            if (!(r is MeshRenderer || r is SkinnedMeshRenderer)) continue;
+
+            foreach (Material m in r.materials)
+            {
+                int prop = m.HasProperty(idBaseColor) ? idBaseColor : m.HasProperty(idColor) ? idColor : -1;
+                if (prop == -1) continue;
+                materiaux.Add(new MatCouleur { mat = m, prop = prop, origine = m.GetColor(prop) });
+            }
+        }
     }
 
     void Start()
@@ -49,6 +80,14 @@ public class EnnemiChase : MonoBehaviour
 
     void Update()
     {
+        // Gelé : plus rien ne bouge tant que le timer tourne
+        if (gelTimer > 0f)
+        {
+            gelTimer -= Time.deltaTime;
+            if (gelTimer <= 0f) FinGel();
+            return;
+        }
+
         switch (state)
         {
             case State.Idle:
@@ -91,7 +130,47 @@ public class EnnemiChase : MonoBehaviour
         SetState(State.Die);
     }
 
+    // Arrêt complet + teinte bleue + animation figée. Un nouveau gel prolonge le gel en cours.
+    public void Geler(float duree)
+    {
+        if (state == State.Die) return;
+
+        if (gelTimer <= 0f) DebutGel();
+        gelTimer = Mathf.Max(gelTimer, duree);
+    }
+
     // --- Interne ---
+
+    private void DebutGel()
+    {
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+
+        if (animator != null)
+        {
+            vitesseAnimAvantGel = animator.speed;
+            animator.speed = 0f;
+        }
+
+        Teinter(true);
+    }
+
+    private void FinGel()
+    {
+        gelTimer = 0f;
+        if (animator != null) animator.speed = vitesseAnimAvantGel;
+        Teinter(false);
+        SetState(JoueurDetecte() ? State.Chase : State.Idle);
+    }
+
+    private void Teinter(bool gele)
+    {
+        foreach (MatCouleur mc in materiaux)
+        {
+            Color c = gele ? Color.Lerp(mc.origine, couleurGel, intensiteGel) : mc.origine;
+            mc.mat.SetColor(mc.prop, c);
+        }
+    }
 
     private bool JoueurDetecte()
     {

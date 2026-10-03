@@ -188,15 +188,12 @@ public class player : MonoBehaviour
 
     private void Geler()
     {
-        ennemisGeles.Clear();
+        var touches = new HashSet<EnnemiChase>();
 
         foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, rayonGel))
         {
-            EnemyStats ennemi = col.GetComponentInParent<EnemyStats>();
-            if (ennemi != null && ennemisGeles.Add(ennemi))
-            {
-                ennemi.ModifySpeed(facteurGel, dureeGel);
-            }
+            EnnemiChase ennemi = col.GetComponentInParent<EnnemiChase>();
+            if (ennemi != null && touches.Add(ennemi)) ennemi.Geler(dureeGel);
         }
 
         // Les particules s'arrêtent pile au bord de la zone : distance = vitesse × durée de vie
