@@ -1,0 +1,1182 @@
+fileFormatVersion: 2
+guid: e19b52af6c365bb42b862a86834af9f3
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: b2a9591990af98743ba3ff7cf1000886, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 1
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationMethod: 0
+    spriteTessellationDetail: -1
+    spriteGeometrySubdivision: 0
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: ac0a3ba748c60b64695b03e2089e8ded
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+    spritePosition: {x: 0, y: 0}
+  multiSpriteImportData: []
+  layeredSpriteImportData:
+  - name: 'A Tourner pour une animation '
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 760
+      y: 2455
+      width: 35
+      height: 37
+    spriteID: 74a7b585b6547c143a3c944f42132e5b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 760, y: 2455}
+    spritePosition: {x: 231, y: 400}
+  - name: A tourner aussi
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 760
+      y: 2500
+      width: 39
+      height: 29
+    spriteID: 217436c75386b5f48b44997b7acecd17
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 760, y: 2500}
+    spritePosition: {x: 768, y: 409}
+  - name: Calque de dessin 16
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 686
+      width: 801
+      height: 308
+    spriteID: 8c704c17b717af04db269ebf758bf2d3
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 686}
+    spritePosition: {x: 110, y: 372}
+  - name: Calque de dessin 12
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1002
+      width: 814
+      height: 290
+    spriteID: 73f32a133cc8f3c458b34b0c5a7ccfb0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1002}
+    spritePosition: {x: 108, y: 398}
+  - name: Calque de dessin 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 620
+      y: 2310
+      width: 133
+      height: 134
+    spriteID: 12ce0de57ffebe745bbafa6b2026dc9e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 620, y: 2310}
+    spritePosition: {x: 181, y: 357}
+  - name: Calque de dessin 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1760
+      y: 922
+      width: 133
+      height: 134
+    spriteID: dd1783cebc281834cb84b86a0b78235e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1760, y: 922}
+    spritePosition: {x: 720, y: 357}
+  - name: Calque de dessin 15
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2679
+      width: 534
+      height: 129
+    spriteID: eeb27344d82a6a342898243c50d290e4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2679}
+    spritePosition: {x: 298, y: 541}
+  - name: Calque de dessin 14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2455
+      width: 748
+      height: 110
+    spriteID: 3fd87c122ae3b8a43a97b64670935444
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2455}
+    spritePosition: {x: 144, y: 400}
+  - name: Calque de dessin 13
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1948
+      width: 798
+      height: 110
+    spriteID: fd268cb32f5924f4f937835952f48491
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1948}
+    spritePosition: {x: 113, y: 452}
+  - name: Calque de dessin 5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 831
+      height: 341
+    spriteID: 79cf0d804d79c7c4d8d384044840354b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+    spritePosition: {x: 35, y: 292}
+  - name: Calque de dessin 2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1779
+      width: 811
+      height: 161
+    spriteID: 80bcc0516c1c66d40be30ef24ccdf6c0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1779}
+    spritePosition: {x: 40, y: 349}
+  - name: Calque de dessin 2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2816
+      width: 605
+      height: 107
+    spriteID: 56294f271229b82409a116ec64358aea
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2816}
+    spritePosition: {x: 236, y: 503}
+  - name: Calque de dessin 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1901
+      y: 922
+      width: 133
+      height: 134
+    spriteID: 5676f251f9c94c04e84518881b912fae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1901, y: 922}
+    spritePosition: {x: 685, y: 276}
+  - name: Calque de dessin 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1755
+      y: 643
+      width: 133
+      height: 134
+    spriteID: 990dad7ae0fa3914f9c2021cec74e9bc
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1755, y: 643}
+    spritePosition: {x: 128, y: 276}
+  - name: Calque de dessin 1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 843
+      y: 4
+      width: 832
+      height: 314
+    spriteID: 70c4fbc4515a42448990937250d2eac6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 843, y: 4}
+    spritePosition: {x: 35, y: 322}
+  - name: Calque de dessin 3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1300
+      width: 816
+      height: 257
+    spriteID: 2919f0c1b65865f4fb923e12ee4d8eee
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1300}
+    spritePosition: {x: 38, y: 332}
+  - name: Calque de dessin 10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 353
+      width: 827
+      height: 325
+    spriteID: ca6a731b0a7ebdd4fbf5b247bc2ef7a5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 353}
+    spritePosition: {x: 117, y: 290}
+  - name: Calque de dessin 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1896
+      y: 643
+      width: 133
+      height: 134
+    spriteID: 23c9461407aeae6428412929247e9697
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1896, y: 643}
+    spritePosition: {x: 197, y: 268}
+  - name: Calque de dessin 4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1694
+      y: 451
+      width: 133
+      height: 134
+    spriteID: 8b6ae5b2cf7664840adf7d8e41b704bd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1694, y: 451}
+    spritePosition: {x: 767, y: 269}
+  - name: Calque de dessin 6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 843
+      y: 326
+      width: 843
+      height: 309
+    spriteID: bd4b6a94905ff774c97926a5db8fa232
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 843, y: 326}
+    spritePosition: {x: 111, y: 312}
+  - name: Calque de dessin 11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2573
+      width: 828
+      height: 98
+    spriteID: 99703f8432d84b34d8bd4a2ed93db2b8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2573}
+    spritePosition: {x: 115, y: 400}
+  - name: Calque de dessin 8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2310
+      width: 608
+      height: 137
+    spriteID: ec0e8767d93c9004e904dac9940898ab
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2310}
+    spritePosition: {x: 315, y: 461}
+  - name: Calque de dessin 7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 1565
+      width: 775
+      height: 206
+    spriteID: e9c45d0b891f01345902f2e39159301d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 1565}
+    spritePosition: {x: 166, y: 314}
+  - name: Calque de dessin 9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2066
+      width: 829
+      height: 104
+    spriteID: 03ecaa8f322e9834dac04fcac8cd2812
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2066}
+    spritePosition: {x: 115, y: 394}
+  - name: ombrage
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 843
+      y: 922
+      width: 909
+      height: 255
+    spriteID: 39c7f54ebd357c944bf5d3abd894d98b
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 843, y: 922}
+    spritePosition: {x: 67, y: 35}
+  - name: parebrse
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1835
+      y: 451
+      width: 117
+      height: 143
+    spriteID: 31d8023e3a98b984281097e89befa1d2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1835, y: 451}
+    spritePosition: {x: 595, y: 155}
+  - name: Laclim
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1760
+      y: 1064
+      width: 117
+      height: 88
+    spriteID: 2d139ee96c0348d4bbd0edaf6a71c8c1
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1760, y: 1064}
+    spritePosition: {x: 502, y: 181}
+  - name: carrosserie
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 843
+      y: 1185
+      width: 916
+      height: 228
+    spriteID: 6fb3a7eb65306434ebbbfcb0c08b5321
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 843, y: 1185}
+    spritePosition: {x: 63, y: 29}
+  - name: metal
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 843
+      y: 643
+      width: 904
+      height: 271
+    spriteID: cdbaf361ad75cec4faf8d815b19f92bf
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 843, y: 643}
+    spritePosition: {x: 61, y: 29}
+  - name: tableaudebord
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2931
+      width: 456
+      height: 117
+    spriteID: 791294de6ba5ff649b0dbbb6613291d8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2931}
+    spritePosition: {x: 261, y: 145}
+  - name: interieur
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1694
+      y: 326
+      width: 348
+      height: 117
+    spriteID: 1b7b1e55486976e4d99e55f6888a6aa0
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 1694, y: 326}
+    spritePosition: {x: 269, y: 141}
+  - name: roues
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 2178
+      width: 677
+      height: 124
+    spriteID: 2d46359aef4f2944e8a48ff4fa408897
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 2178}
+    spritePosition: {x: 221, y: 0}
+  spriteImportData: []
+  rigSpriteImportData: []
+  sharedRigSpriteImportData: []
+  mosaicSpriteImportData: []
+  sharedRigCharacterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  characterData:
+    bones: []
+    parts: []
+    dimension: {x: 0, y: 0}
+    characterGroups: []
+    pivot: {x: 0, y: 0}
+    boneReadOnly: 0
+  platformSettings: []
+  mosaicLayers: 1
+  characterMode: 1
+  documentPivot: {x: 0, y: 0}
+  documentAlignment: 7
+  importHiddenLayers: 0
+  layerMappingOption: 2
+  generatePhysicsShape: 0
+  paperDollMode: 0
+  keepDupilcateSpriteName: 1
+  generateTileAssets: 0
+  tilePaletteCellLayout: 0
+  tilePaletteHexagonLayout: 0
+  tilePaletteCellSize: {x: 1, y: 1, z: 0}
+  tilePaletteCellSizing: 0
+  transparencySortMode: 0
+  transparencySortAxis: {x: 0, y: 0, z: 1}
+  tileTemplate: {instanceID: 0}
+  padding: 4
+  spriteSizeExpand: 0
+  skeletonAssetReferenceID: 
+  pipeline: {instanceID: 0}
+  pipelineVersion: 
+  spriteCategoryList:
+    categories: []
+  spritePackingTag: 
+  resliceFromLayer: 0
+  pSDLayerImportSetting: []
+  psdLayers:
+  - name: 'A Tourner pour une animation '
+    spriteName: 'A Tourner pour une animation '
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 74a7b585b6547c143a3c944f42132e5b
+    layerID: 0
+    mosaicPosition: {x: 760, y: 2455}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: A tourner aussi
+    spriteName: A tourner aussi
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 217436c75386b5f48b44997b7acecd17
+    layerID: -1061511415
+    mosaicPosition: {x: 760, y: 2500}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 16
+    spriteName: Calque de dessin 16
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8c704c17b717af04db269ebf758bf2d3
+    layerID: -378622365
+    mosaicPosition: {x: 4, y: 686}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 12
+    spriteName: Calque de dessin 12
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 73f32a133cc8f3c458b34b0c5a7ccfb0
+    layerID: -378622361
+    mosaicPosition: {x: 4, y: 1002}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 4
+    spriteName: Calque de dessin 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 12ce0de57ffebe745bbafa6b2026dc9e
+    layerID: 1905124540
+    mosaicPosition: {x: 620, y: 2310}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 4
+    spriteName: Calque de dessin 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: dd1783cebc281834cb84b86a0b78235e
+    layerID: -701776312
+    mosaicPosition: {x: 1760, y: 922}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 15
+    spriteName: Calque de dessin 15
+    isGroup: 0
+    parentIndex: -1
+    spriteID: eeb27344d82a6a342898243c50d290e4
+    layerID: -378622366
+    mosaicPosition: {x: 4, y: 2679}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 14
+    spriteName: Calque de dessin 14
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 3fd87c122ae3b8a43a97b64670935444
+    layerID: -378622367
+    mosaicPosition: {x: 4, y: 2455}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 13
+    spriteName: Calque de dessin 13
+    isGroup: 0
+    parentIndex: -1
+    spriteID: fd268cb32f5924f4f937835952f48491
+    layerID: -378622360
+    mosaicPosition: {x: 4, y: 1948}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 5
+    spriteName: Calque de dessin 5
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 79cf0d804d79c7c4d8d384044840354b
+    layerID: -823758815
+    mosaicPosition: {x: 4, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 2
+    spriteName: Calque de dessin 2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 80bcc0516c1c66d40be30ef24ccdf6c0
+    layerID: -1583273702
+    mosaicPosition: {x: 4, y: 1779}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 2
+    spriteName: Calque de dessin 2
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 56294f271229b82409a116ec64358aea
+    layerID: 145198694
+    mosaicPosition: {x: 4, y: 2816}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 4
+    spriteName: Calque de dessin 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 5676f251f9c94c04e84518881b912fae
+    layerID: 864307629
+    mosaicPosition: {x: 1901, y: 922}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 4
+    spriteName: Calque de dessin 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 990dad7ae0fa3914f9c2021cec74e9bc
+    layerID: -1864575726
+    mosaicPosition: {x: 1755, y: 643}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 1
+    spriteName: Calque de dessin 1
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 70c4fbc4515a42448990937250d2eac6
+    layerID: 1145609653
+    mosaicPosition: {x: 843, y: 4}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 3
+    spriteName: Calque de dessin 3
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2919f0c1b65865f4fb923e12ee4d8eee
+    layerID: -17189761
+    mosaicPosition: {x: 4, y: 1300}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 10
+    spriteName: Calque de dessin 10
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ca6a731b0a7ebdd4fbf5b247bc2ef7a5
+    layerID: -378622363
+    mosaicPosition: {x: 4, y: 353}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 4
+    spriteName: Calque de dessin 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 23c9461407aeae6428412929247e9697
+    layerID: -298491785
+    mosaicPosition: {x: 1896, y: 643}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 4
+    spriteName: Calque de dessin 4
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 8b6ae5b2cf7664840adf7d8e41b704bd
+    layerID: 1267592156
+    mosaicPosition: {x: 1694, y: 451}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 6
+    spriteName: Calque de dessin 6
+    isGroup: 0
+    parentIndex: -1
+    spriteID: bd4b6a94905ff774c97926a5db8fa232
+    layerID: 742325126
+    mosaicPosition: {x: 843, y: 326}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 11
+    spriteName: Calque de dessin 11
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 99703f8432d84b34d8bd4a2ed93db2b8
+    layerID: -378622362
+    mosaicPosition: {x: 4, y: 2573}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 8
+    spriteName: Calque de dessin 8
+    isGroup: 0
+    parentIndex: -1
+    spriteID: ec0e8767d93c9004e904dac9940898ab
+    layerID: -64243928
+    mosaicPosition: {x: 4, y: 2310}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 7
+    spriteName: Calque de dessin 7
+    isGroup: 0
+    parentIndex: -1
+    spriteID: e9c45d0b891f01345902f2e39159301d
+    layerID: -1986558229
+    mosaicPosition: {x: 4, y: 1565}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Calque de dessin 9
+    spriteName: Calque de dessin 9
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 03ecaa8f322e9834dac04fcac8cd2812
+    layerID: 1501840013
+    mosaicPosition: {x: 4, y: 2066}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: ombrage
+    spriteName: ombrage
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 39c7f54ebd357c944bf5d3abd894d98b
+    layerID: 1922405181
+    mosaicPosition: {x: 843, y: 922}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: parebrse
+    spriteName: parebrse
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 31d8023e3a98b984281097e89befa1d2
+    layerID: -152843164
+    mosaicPosition: {x: 1835, y: 451}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: Laclim
+    spriteName: Laclim
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2d139ee96c0348d4bbd0edaf6a71c8c1
+    layerID: -1318219268
+    mosaicPosition: {x: 1760, y: 1064}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: carrosserie
+    spriteName: carrosserie
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 6fb3a7eb65306434ebbbfcb0c08b5321
+    layerID: -1510771444
+    mosaicPosition: {x: 843, y: 1185}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: metal
+    spriteName: metal
+    isGroup: 0
+    parentIndex: -1
+    spriteID: cdbaf361ad75cec4faf8d815b19f92bf
+    layerID: -374476331
+    mosaicPosition: {x: 843, y: 643}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: tableaudebord
+    spriteName: tableaudebord
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 791294de6ba5ff649b0dbbb6613291d8
+    layerID: 472258494
+    mosaicPosition: {x: 4, y: 2931}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: interieur
+    spriteName: interieur
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 1b7b1e55486976e4d99e55f6888a6aa0
+    layerID: -1645070985
+    mosaicPosition: {x: 1694, y: 326}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  - name: roues
+    spriteName: roues
+    isGroup: 0
+    parentIndex: -1
+    spriteID: 2d46359aef4f2944e8a48ff4fa408897
+    layerID: 1601815868
+    mosaicPosition: {x: 4, y: 2178}
+    flatten: 0
+    isImported: 1
+    isVisible: 1
+  mosaicPSDLayers: []
+  rigPSDLayers: []
+  sharedRigPSDLayers: []
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  spriteSizeExpandChanged: 0
+  generateGOHierarchy: 0
+  textureAssetName: 
+  prefabAssetName: 
+  spriteLibAssetName: 
+  skeletonAssetName: 
+  secondarySpriteTextures: []

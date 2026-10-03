@@ -41,9 +41,13 @@ public class player : MonoBehaviour
     public Transform eyePos;
     public float timerbarFrost, timeBarFrost;
 
+    [Header("Vie")]
+    public float rayonContact = 0.5f;
+    public float dureeInvulnerabilite = 1f;
+    public System.Action OnMort;
+
     [Header("Gel de zone")]
     public float rayonGel = 3f;
-    [Range(0f, 1f)] public float facteurGel = 0.3f; // 0.3 = 30 % de la vitesse
     public float dureeGel = 2f;
 
     [Header("Caddie")]
@@ -66,11 +70,13 @@ public class player : MonoBehaviour
     public AudioSource audioSource;
     public List<SonEtat> sonsEtats = new List<SonEtat>();
 
+    public bool EstMort => health <= 0f;
+
     private Coroutine deguisement;
     private playerstate etatPrecedent;
     private bool etatInitialise;
     private Vector2 derniereDirection = Vector2.right;
-    private readonly HashSet<EnemyStats> ennemisGeles = new HashSet<EnemyStats>();
+    private float invulTimer;
 
     void Start()
     {
@@ -84,6 +90,9 @@ public class player : MonoBehaviour
     void Update()
     {
         if (instance == null) instance = this;
+
+        if (invulTimer > 0f) invulTimer -= Time.deltaTime;
+        VerifierContacts();
 
         switch (state)
         {
@@ -155,6 +164,48 @@ public class player : MonoBehaviour
         UpdateFlecheOeil();
     }
 
+    // --- Vie ---
+
+    private void VerifierContacts()
+    {
+        if (EstMort || invulTimer > 0f || state == playerstate.invincible) return;
+
+        foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, rayonContact))
+        {
+            EnnemiChase ennemi = col.GetComponentInParent<EnnemiChase>();
+            if (ennemi != null && ennemi.PeutBlesser)
+            {
+                TakeDamage(ennemi.DegatsContact);
+                return; // un seul coup par contact, l'invulnérabilité gère la suite
+            }
+        }
+    }
+
+    public void TakeDamage(float amount)
+    {
+        if (EstMort || amount <= 0f || invulTimer > 0f || state == playerstate.invincible) return;
+
+        health = Mathf.Max(health - amount, 0f);
+        invulTimer = dureeInvulnerabilite;
+
+        if (EstMort) Mourir();
+        else animatorClim.SetTrigger("Hurt");
+    }
+
+    public void Heal(float amount)
+    {
+        if (EstMort || amount <= 0f) return;
+        health = Mathf.Min(health + amount, maxHealth);
+    }
+
+    private void Mourir()
+    {
+        state = playerstate.stuck;
+        rb.linearVelocity = Vector2.zero;
+        animatorClim.SetTrigger("Death");
+        OnMort?.Invoke();
+    }
+
     // --- Lancer de l'œil : tout droit dans la dernière direction de déplacement ---
 
     private void OrienterBras(Vector2 dir)
@@ -184,7 +235,16 @@ public class player : MonoBehaviour
         }
     }
 
-    // --- Gel de zone ---
+    // --- Gel de zone : instantané, sans bloquer le déplacement ---
+
+    public void LancerGel(InputAction.CallbackContext context)
+    {
+        if (state != playerstate.idle && state != playerstate.confused) return;
+        if (timerbarFrost < timeBarFrost) return; // jauge pas encore rechargée
+
+        timerbarFrost = 0f;
+        Geler();
+    }
 
     private void Geler()
     {
@@ -274,23 +334,6 @@ public class player : MonoBehaviour
         }
     }
 
-    // --- Attaque (gel) ---
-
-    public void AttackDebut(InputAction.CallbackContext context)
-    {
-        if (state == playerstate.invincible || state == playerstate.stuck) return;
-        if (timerbarFrost < timeBarFrost) return; // jauge pas encore rechargée
-
-        timerbarFrost = 0f;
-        animatorClim.SetBool("Frost", true);
-        Geler();
-    }
-
-    public void AttackFin(InputAction.CallbackContext context)
-    {
-        animatorClim.SetBool("Frost", false);
-    }
-
     // --- Déguisement ---
 
     public void Deguiser(float duree)
@@ -325,15 +368,13 @@ public class player : MonoBehaviour
 
     private void OnEnable()
     {
-        inputPlayer.actions.FindAction("Attack").started += AttackDebut;
-        inputPlayer.actions.FindAction("Attack").canceled += AttackFin;
+        inputPlayer.actions.FindAction("Attack").started += LancerGel;
         inputPlayer.actions.FindAction("Jump").started += LancerOeil;
     }
 
     private void OnDisable()
     {
-        inputPlayer.actions.FindAction("Attack").started -= AttackDebut;
-        inputPlayer.actions.FindAction("Attack").canceled -= AttackFin;
+        inputPlayer.actions.FindAction("Attack").started -= LancerGel;
         inputPlayer.actions.FindAction("Jump").started -= LancerOeil;
     }
 
@@ -355,5 +396,8 @@ public class player : MonoBehaviour
 
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, rayonCaddie);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, rayonContact);
     }
 }

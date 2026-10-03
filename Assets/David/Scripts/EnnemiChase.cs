@@ -10,7 +10,9 @@ public class EnnemiChase : MonoBehaviour
     [Header("Références")]
     [SerializeField] private Transform visuel;      // le FBX enfant (sinon l'objet lui-même)
     [SerializeField] private Animator animator;     // sinon cherché dans les enfants
-
+    [SerializeField] private float degatsContact;
+    public float DegatsContact => degatsContact;
+    public bool PeutBlesser => gelTimer <=0f && state != State.Die;
     [Header("Angle Y du modèle")]
     [SerializeField] private float angleDroite = 90f;
     [SerializeField] private float angleGauche = -90f;

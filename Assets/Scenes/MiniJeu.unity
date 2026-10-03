@@ -1562,6 +1562,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2583036528566408954, guid: 5ddcfa95aebf89043be52d2150a90e04, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364348332362409281, guid: 5ddcfa95aebf89043be52d2150a90e04, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2767,7 +2775,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnerVoitures
   voitures:
-  - {fileID: 5612938210002800811, guid: 6f878ed2a9052fd408db2d837353692e, type: 3}
+  - {fileID: 1396851167256274095, guid: c4650b533f516fb4594a7902f508481d, type: 3}
+  - {fileID: 3491668467839160949, guid: 37157fae719599f4d98b758a3f68d3c8, type: 3}
+  - {fileID: 5504520936322268276, guid: 19da4392c8891d947bd7cdcac50ad979, type: 3}
   intervalleMin: 0.6
   intervalleMax: 2
   vitesseMin: 3
