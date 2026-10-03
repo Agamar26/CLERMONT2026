@@ -19,8 +19,7 @@ public class EnnemiChase : MonoBehaviour
     [SerializeField] private float rayonDetection = 8f;
     [SerializeField] private float rayonPerte = 11f;
 
-    [Header("Photo au contact (écart entre les colliders)")]
-    [SerializeField] private float distancePhoto = 0.2f;
+    [Header("Photo (contact = rayonContact du joueur)")]
     [SerializeField] private float margePhoto = 0.3f; // évite d'alterner Photo/Chase à la limite
 
     [Header("Noms des states dans l'Animator")]
@@ -49,7 +48,6 @@ public class EnnemiChase : MonoBehaviour
     private SpriteRenderer[] sprites;
     private Color[] couleursOrigine;
     private Collider2D monCollider;
-    private Collider2D colliderJoueur;
 
     void Awake()
     {
@@ -106,9 +104,7 @@ public class EnnemiChase : MonoBehaviour
                 Vector3 playerPos = player.instance.transform.position;
                 Orienter(playerPos.x - transform.position.x);
 
-                float d = DistanceJoueur();
-                if (d < 1f) Debug.Log($"{name} écart = {d:0.00}", this);
-                if (DistanceJoueur() <= distancePhoto)
+                if (AuContact(0f))
                 {
                     SetState(State.Photo);
                     break;
@@ -123,7 +119,7 @@ public class EnnemiChase : MonoBehaviour
                     break;
                 }
                 Orienter(player.instance.transform.position.x - transform.position.x);
-                if (DistanceJoueur() > distancePhoto + margePhoto) SetState(State.Chase);
+                if (!AuContact(margePhoto)) SetState(State.Chase);
                 break;
 
             case State.Stun:
@@ -162,15 +158,14 @@ public class EnnemiChase : MonoBehaviour
 
     // --- Interne ---
 
-    // Écart entre les bords des colliders (négatif s'ils se chevauchent), sinon distance entre centres
-    private float DistanceJoueur()
+    // Même test que les dégâts côté joueur : le cercle rayonContact touche-t-il mon collider ?
+    private bool AuContact(float marge)
     {
-        if (colliderJoueur == null) colliderJoueur = player.instance.GetComponent<Collider2D>();
+        Vector2 p = player.instance.transform.position;
+        float r = player.instance.rayonContact + marge;
 
-        if (monCollider != null && colliderJoueur != null && monCollider.enabled && colliderJoueur.enabled)
-            return monCollider.Distance(colliderJoueur).distance;
-
-        return Vector2.Distance(transform.position, player.instance.transform.position);
+        Vector2 pointProche = monCollider != null ? monCollider.ClosestPoint(p) : (Vector2)transform.position;
+        return Vector2.Distance(pointProche, p) <= r;
     }
 
     private void DebutGel()
