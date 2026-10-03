@@ -3830,8 +3830,8 @@ MonoBehaviour:
   imper: {fileID: 4621233601088671597}
   lunettes: {fileID: 7010275024303757524}
   speed: 5
-  basespeed: 6
-  speedBonus: 10
+  basespeed: 13
+  speedBonus: 18
   bonusTime: 3
   bonusTimer: 0
   stamina: 100
@@ -3859,8 +3859,9 @@ MonoBehaviour:
   eyePos: {fileID: 510025110801524475}
   timerbarFrost: 3
   timeBarFrost: 3
+  rayonContact: 0.5
+  dureeInvulnerabilite: 1
   rayonGel: 3
-  facteurGel: 0.759
   dureeGel: 3
   rayonCaddie: 1
   flecheOeil: {fileID: 0}

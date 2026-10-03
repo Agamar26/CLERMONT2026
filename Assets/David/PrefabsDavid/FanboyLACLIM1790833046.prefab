@@ -130,15 +130,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: c1be94524137fd44189cc0ea9f165ea5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.28
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: c1be94524137fd44189cc0ea9f165ea5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.28
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: c1be94524137fd44189cc0ea9f165ea5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.28
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: c1be94524137fd44189cc0ea9f165ea5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,6 +179,10 @@ PrefabInstance:
     - target: {fileID: -7552582706839291426, guid: c1be94524137fd44189cc0ea9f165ea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7552582706839291426, guid: c1be94524137fd44189cc0ea9f165ea5, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: c1be94524137fd44189cc0ea9f165ea5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -286,6 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnnemiChase
   visuel: {fileID: 0}
   animator: {fileID: 0}
+  degatsContact: 0
   angleDroite: 0
   angleGauche: 180
   rayonDetection: 30
