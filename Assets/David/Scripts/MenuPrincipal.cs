@@ -9,11 +9,13 @@ public class MenuPrincipal : MonoBehaviour
     public GameObject panelMenu;
     public GameObject panelOptions;
     public GameObject panelCredits;
+    public GameObject panelCommandes;
 
     [Header("Premier élément sélectionné par panneau")]
     public GameObject premierMenu;     // bouton Jouer
     public GameObject premierOptions;  // premier slider ou bouton Retour
     public GameObject premierCredits;  // bouton Retour
+    public GameObject premierCommandes; // bouton Retour
 
     private GameObject selectionParDefaut;
 
@@ -37,6 +39,7 @@ public class MenuPrincipal : MonoBehaviour
 
     public void Options() => Afficher(panelOptions, premierOptions);
     public void Credits() => Afficher(panelCredits, premierCredits);
+    public void Commandes() => Afficher(panelCommandes, premierCommandes);
 
     public void Retour()
     {
@@ -59,6 +62,7 @@ public class MenuPrincipal : MonoBehaviour
         panelMenu.SetActive(panel == panelMenu);
         if (panelOptions) panelOptions.SetActive(panel == panelOptions);
         if (panelCredits) panelCredits.SetActive(panel == panelCredits);
+        if (panelCommandes) panelCommandes.SetActive(panel == panelCommandes);
 
         selectionParDefaut = premier;
         EventSystem.current.SetSelectedGameObject(null);
