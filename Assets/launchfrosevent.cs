@@ -11,7 +11,7 @@ public class launchfrosevent : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-       if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
+     /*  if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.5f)
         {
             if(player.instance.timerbarFrost != 0)
             {
@@ -25,7 +25,7 @@ public class launchfrosevent : StateMachineBehaviour
                 player.instance.particlesFrost.SetActive(false);
             }
             
-        }
+        }*/
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
