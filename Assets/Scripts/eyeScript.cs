@@ -69,6 +69,10 @@ public class eyeScript : MonoBehaviour
             direction.Add(eze);
             GetComponent<Rigidbody2D>().linearVelocity = eze.normalized * (player.instance.forceLaunch/ divise);
             divise += 0.5f;
+            if (collision.gameObject.tag == "Enemy")
+            {
+                collision.transform.GetComponent<EnnemiChase>().takeDamage();
+            }
         }
     }
 

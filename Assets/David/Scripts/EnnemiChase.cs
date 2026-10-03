@@ -72,6 +72,7 @@ public class EnnemiChase : MonoBehaviour
                 break;
 
             case State.Die:
+                
                 break;
         }
     }
@@ -88,7 +89,7 @@ public class EnnemiChase : MonoBehaviour
     public void Die()
     {
         if (state == State.Die) return;
-        SetState(State.Die);
+        
     }
 
     // --- Interne ---
@@ -112,7 +113,10 @@ public class EnnemiChase : MonoBehaviour
     private void SetState(State nouveau)
     {
         state = nouveau;
-
+        if(state == State.Die)
+        {
+            Destroy(gameObject, 3);
+        }
         bool mobile = nouveau == State.Chase;
         agent.isStopped = !mobile;
         if (!mobile) agent.ResetPath();
@@ -127,5 +131,10 @@ public class EnnemiChase : MonoBehaviour
             _ => stateDie
         };
         animator.CrossFadeInFixedTime(nom, fondu);
+    }
+    public void takeDamage()
+    {
+        SetState(State.Die);
+
     }
 }
