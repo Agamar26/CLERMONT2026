@@ -82,7 +82,7 @@ public class player : MonoBehaviour
     private SpriteRenderer[] sprites;
     private Color[] couleursOrigine;
     private bool clignoteRouge;
-
+    
     void Start()
     {
         Time.timeScale = 1f;
