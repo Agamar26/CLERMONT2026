@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.UIElements;
 using UnityEngine;
 
 public class eyeScript : MonoBehaviour
@@ -11,66 +9,114 @@ public class eyeScript : MonoBehaviour
     public float divise;
     public float timerCanGetBall;
     public LayerMask nulllayermask;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    [Header("Dégâts")]
+    public float degats = 5f;
+
+    [Header("Récupération")]
+    public float rayonRecup = 1.5f;
+    public float vitesseRetour = 20f;
+
+    [Header("Retour automatique (0 = désactivé)")]
+    public int rebondsMax = 3;
+    public float dureeMax = 3f;
+
+    private bool attrape;
+    private int rebonds;
+    private float tempsEnVol;
+
     void Start()
     {
         divise = 1;
     }
 
-    // Update is called once per frame
     void Update()
     {
-         for (int i = 0; i < origin.Count; i++)
+        for (int i = 0; i < origin.Count; i++)
         {
             Debug.DrawRay(origin[i], direction[i], Color.red);
         }
-         if(!launched ) {return;}
-        if(timerCanGetBall < 0.5f)
+        if (!launched) { return; }
+
+        if (!attrape)
         {
-            timerCanGetBall += 1f * Time.deltaTime;
+            tempsEnVol += Time.deltaTime;
+            if (dureeMax > 0f && tempsEnVol >= dureeMax) Attraper();
         }
-        else
+
+        if (timerCanGetBall < 0.5f)
         {
-            if (Vector2.Distance(transform.position, player.instance.transform.position) < 1)
+            timerCanGetBall += Time.deltaTime;
+            return;
+        }
+
+        if (!attrape && Vector2.Distance(transform.position, player.instance.transform.position) < rayonRecup)
+        {
+            Attraper();
+        }
+
+        if (!attrape) { return; }
+
+        Transform cible = player.instance.eyePos;
+        transform.localEulerAngles = Vector3.MoveTowards(transform.localEulerAngles, cible.localEulerAngles, vitesseRetour * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, cible.position, vitesseRetour * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, cible.position) < 0.05f)
+        {
+            cible.GetComponent<SpriteRenderer>().enabled = true;
+            player.instance.donthaveEye = false;
+
+            if (player.instance.state == player.playerstate.confused)
             {
-                // Utilise Vector3 pour les angles euler
-                transform.localEulerAngles = Vector3.MoveTowards(transform.localEulerAngles, player.instance.eyePos.localEulerAngles, 20 * Time.deltaTime);
-                transform.position = Vector2.MoveTowards(transform.position, player.instance.eyePos.position, 20 * Time.deltaTime);
-
-                // On vérifie si on est très proche de eyePos.position (avec un seuil au lieu de ==)
-                if (Vector2.Distance(transform.position, player.instance.eyePos.position) < 0.05f)
-                {
-                    player.instance.eyePos.GetComponent<SpriteRenderer>().enabled = true;
-                    player.instance.donthaveEye = false;
-
-                    if (player.instance.state == player.playerstate.confused)
-                    {
-                        player.instance.state = player.playerstate.idle;
-                    }
-
-                    Destroy(gameObject);
-
-                }
+                player.instance.state = player.playerstate.idle;
             }
+
+            Destroy(gameObject);
         }
+    }
+
+    // Coupe la physique : l'œil traverse les murs pour revenir au joueur
+    private void Attraper()
+    {
+        attrape = true;
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = Vector2.zero;
+        rb.simulated = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!launched) { return; }
-        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Enemy")
+        if (!launched || attrape) { return; }
+
+        bool estEnnemi = collision.gameObject.CompareTag("Enemy");
+        if (!collision.gameObject.CompareTag("Ground") && !estEnnemi) { return; }
+
+        if (estEnnemi)
         {
-            
-            var ezez = Physics2D.Raycast(origin[origin.Count-1],(Vector2)transform.position- origin[origin.Count-1], 50);
-            
-            
-            var eze = Vector2.Reflect((collision.contacts[0].point - origin[origin.Count - 1]).normalized, collision.contacts[0].normal);
-            origin.Add(collision.contacts[0].point);
-            direction.Add(eze);
-            GetComponent<Rigidbody2D>().linearVelocity = eze.normalized * (player.instance.forceLaunch/ divise);
-            divise += 0.5f;
+            EnemyStats stats = collision.gameObject.GetComponentInParent<EnemyStats>();
+            if (stats != null) stats.TakeDamage(degats / divise);
+            collision.gameObject.GetComponentInParent<EnnemiChase>()?.Stun(0.5f);
         }
+
+        rebonds++;
+        if (rebondsMax > 0 && rebonds >= rebondsMax)
+        {
+            Attraper();
+            return;
+        }
+
+        Vector2 contact = collision.contacts[0].point;
+        Vector2 eze = Vector2.Reflect((contact - origin[origin.Count - 1]).normalized, collision.contacts[0].normal);
+        origin.Add(contact);
+        direction.Add(eze);
+        GetComponent<Rigidbody2D>().linearVelocity = eze.normalized * (player.instance.forceLaunch / divise);
+        divise += 0.5f;
     }
 
-   
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, rayonRecup);
+    }
 }

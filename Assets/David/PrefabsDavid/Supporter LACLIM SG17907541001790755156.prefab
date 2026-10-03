@@ -98,6 +98,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 4008c2ddb0c314c488e963f4c1f729dd, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7515675096420019977}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 4008c2ddb0c314c488e963f4c1f729dd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -9042795012382000836}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 4008c2ddb0c314c488e963f4c1f729dd, type: 3}
 --- !u!1 &4821007960886379764 stripped
 GameObject:
@@ -212,6 +215,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   maxHealth: 10
   baseSpeed: 3.5
+  hauteurPopup: 1.5
+  couleurPopup: {r: 1, g: 1, b: 1, a: 1}
   speeddebase: 0
   agent: {fileID: 0}
 --- !u!70 &-7515675096420019977
@@ -251,3 +256,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &-9042795012382000836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4821007960886379764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad31cedc9c041384291edf09c7d110de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthBar
+  offset: {x: 0, y: 10, z: 0}
+  largeur: 5
+  hauteur: 1
+  cacherSiPlein: 1
+  couleurFond: {r: 0, g: 0, b: 0, a: 0.6}
+  couleurPleine: {r: 0, g: 1, b: 0, a: 1}
+  couleurVide: {r: 1, g: 0, b: 0, a: 1}

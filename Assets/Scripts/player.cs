@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
-using UnityEngine.WSA;
-using static enemy;
 
 public class player : MonoBehaviour
 {
     public static player instance;
     public Rigidbody2D rb;
     public Vector2 move;
-    public Vector2 look;
     public GameObject caddie;
     public GameObject chapeau;
     public GameObject imper;
@@ -46,6 +41,11 @@ public class player : MonoBehaviour
     public Transform eyePos;
     public float timerbarFrost, timeBarFrost;
 
+    [Header("Gel de zone")]
+    public float rayonGel = 3f;
+    [Range(0f, 1f)] public float facteurGel = 0.3f; // 0.3 = 30 % de la vitesse
+    public float dureeGel = 2f;
+
     [Header("Flèche vers l'œil lancé")]
     public FlecheObjectif flecheOeil;
     public string tagOeil = "Oeil";
@@ -66,14 +66,13 @@ public class player : MonoBehaviour
     private Coroutine deguisement;
     private playerstate etatPrecedent;
     private bool etatInitialise;
+    private Vector2 derniereDirection = Vector2.right;
+    private readonly HashSet<EnemyStats> ennemisGeles = new HashSet<EnemyStats>();
 
     void Start()
     {
         Time.timeScale = 1f;
-        if (instance == null)
-        {
-            instance = this;
-        }
+        if (instance == null) instance = this;
 
         if (audioSource != null) audioSource.playOnAwake = false;
         if (flecheOeil != null && flecheOeil.joueur == null) flecheOeil.joueur = transform;
@@ -81,30 +80,19 @@ public class player : MonoBehaviour
 
     void Update()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
+        if (instance == null) instance = this;
 
         switch (state)
         {
             case playerstate.idle:
                 timerbarFrost = Mathf.MoveTowards(timerbarFrost, timeBarFrost, Time.deltaTime);
                 speed = basespeed;
-                var ezze = camera.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-                var ez = Mathf.Atan2(ezze.y, ezze.x) * Mathf.Rad2Deg;
-                brasPoint.transform.rotation = Quaternion.Euler(0, 0, ez);
                 if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
                 {
                     animatorClim.SetBool("Run", true);
-                    if (Mathf.Round(move.x) < 0)
-                    {
-                        rotY = 180;
-                    }
-                    else if (Mathf.Round(move.x) > 0)
-                    {
-                        rotY = 0;
-                    }
+                    derniereDirection = new Vector2(Mathf.Round(move.x), Mathf.Round(move.y)).normalized;
+                    if (Mathf.Round(move.x) < 0) rotY = 180;
+                    else if (Mathf.Round(move.x) > 0) rotY = 0;
                 }
                 else
                 {
@@ -112,21 +100,17 @@ public class player : MonoBehaviour
                 }
 
                 transform.rotation = Quaternion.Euler(0, rotY, 0);
+                OrienterBras(derniereDirection);
                 isGrounded = Physics2D.OverlapCircle(transform.position - new Vector3(0, GetComponent<CapsuleCollider2D>().size.y / 2, 0), radiusDetectGround, layerGround);
                 break;
+
             case playerstate.confused:
                 timerbarFrost = Mathf.MoveTowards(timerbarFrost, timeBarFrost, Time.deltaTime);
                 if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
                 {
                     animatorClim.SetBool("Run", true);
-                    if (Mathf.Round(move.x) < 0)
-                    {
-                        rotY = 0;
-                    }
-                    else if (Mathf.Round(move.x) > 0)
-                    {
-                        rotY = 180;
-                    }
+                    if (Mathf.Round(move.x) < 0) rotY = 0;
+                    else if (Mathf.Round(move.x) > 0) rotY = 180;
                 }
                 else
                 {
@@ -138,50 +122,8 @@ public class player : MonoBehaviour
                 break;
 
             case playerstate.stuck:
-                animatorClim.SetBool("Run", false);
-                break;
             case playerstate.frost:
                 animatorClim.SetBool("Run", false);
-                break;
-            case playerstate.prelaunch:
-
-                if (inputPlayer.currentControlScheme == "Gamepad")
-                {
-                    launchdirection = (look).normalized;
-                }
-                else
-                {
-                    launchdirection = (look - (Vector2)transform.position).normalized;
-                }
-
-                var ezqq = Mathf.Atan2(launchdirection.y, launchdirection.x) * Mathf.Rad2Deg;
-                print(ezqq);
-
-                brasPoint.transform.rotation = Quaternion.Euler(0, 0, ezqq);
-                if (inputPlayer.currentControlScheme == "Gamepad")
-                {
-                    if (look.x > 0)
-                    {
-                        rotY = 0;
-                    }
-                    else if (look.x < 0)
-                    {
-                        rotY = 180;
-                    }
-                }
-                else
-                {
-                    if (look.x > transform.position.x)
-                    {
-                        rotY = 0;
-                    }
-                    else if (look.x < transform.position.x)
-                    {
-                        rotY = 180;
-                    }
-                }
-
-                transform.rotation = Quaternion.Euler(0, rotY, 0);
                 break;
 
             case playerstate.invincible:
@@ -195,31 +137,12 @@ public class player : MonoBehaviour
                 else
                 {
                     caddie.SetActive(false);
-                    if (donthaveEye)
-                    {
-                        state = playerstate.confused;
-                    }
-                    else
-                    {
-                        state = playerstate.idle;
-                    }
+                    state = donthaveEye ? playerstate.confused : playerstate.idle;
                 }
-                if (Mathf.Round(move.x) != 0 || Mathf.Round(move.y) != 0)
-                {
-                    if (Mathf.Round(move.x) < 0)
-                    {
-                        rotY = 180;
-                    }
-                    else if (Mathf.Round(move.x) > 0)
-                    {
-                        rotY = 0;
-                    }
-                }
+                if (Mathf.Round(move.x) < 0) rotY = 180;
+                else if (Mathf.Round(move.x) > 0) rotY = 0;
 
                 transform.rotation = Quaternion.Euler(0, rotY, 0);
-                break;
-
-            case playerstate.launch:
                 break;
         }
 
@@ -227,7 +150,52 @@ public class player : MonoBehaviour
         UpdateFlecheOeil();
     }
 
-    // La flèche suit le flag donthaveEye : active tant que l'œil est lancé, coupée une fois récupéré.
+    // --- Lancer de l'œil : tout droit dans la dernière direction de déplacement ---
+
+    private void OrienterBras(Vector2 dir)
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        brasPoint.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    public void LancerOeil(InputAction.CallbackContext context)
+    {
+        if (donthaveEye) return;
+        if (state != playerstate.idle && state != playerstate.frost) return;
+
+        launchdirection = derniereDirection;
+        OrienterBras(launchdirection);
+        animatorClim.SetTrigger("Launch");
+    }
+
+    // --- Gel de zone ---
+
+    private void Geler()
+    {
+        ennemisGeles.Clear();
+
+        foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, rayonGel))
+        {
+            EnemyStats ennemi = col.GetComponentInParent<EnemyStats>();
+            if (ennemi != null && ennemisGeles.Add(ennemi))
+            {
+                ennemi.ModifySpeed(facteurGel, dureeGel);
+            }
+        }
+
+        // Les particules s'arrêtent pile au bord de la zone : distance = vitesse × durée de vie
+        if (particlesFrost != null)
+        {
+            particlesFrost.SetActive(true);
+            ParticleSystem ps = particlesFrost.GetComponent<ParticleSystem>();
+            var main = ps.main;
+            main.startSpeed = rayonGel / main.startLifetime.constant;
+            ps.Play();
+        }
+    }
+
+    // --- Flèche & sons ---
+
     private void UpdateFlecheOeil()
     {
         if (flecheOeil == null) return;
@@ -238,7 +206,6 @@ public class player : MonoBehaviour
             return;
         }
 
-        // Cherche l'œil une seule fois par lancer (ou à nouveau s'il a été détruit puis recréé)
         if (flecheOeil.cible == null)
         {
             GameObject oeil = GameObject.FindWithTag(tagOeil);
@@ -249,8 +216,6 @@ public class player : MonoBehaviour
         flecheOeil.Activer();
     }
 
-    // Détecte chaque changement d'état (même fait par un autre script) :
-    // coupe le son de l'ancien état et lance celui du nouveau.
     private void UpdateSonEtat()
     {
         if (audioSource == null) return;
@@ -275,72 +240,48 @@ public class player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Direction normalisée : même vitesse en diagonale qu'en ligne droite
         Vector2 dir = new Vector2(Mathf.Round(move.x), Mathf.Round(move.y)).normalized;
 
-        if (state == playerstate.idle)
+        switch (state)
         {
-            rb.linearVelocity = dir * speed;
-        }
-        else if (state == playerstate.stuck)
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-        else if (state == playerstate.confused)
-        {
-            rb.linearVelocity = -dir * speed;
-        }
-        else if (state == playerstate.prelaunch || state == playerstate.launch)
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-        else if (state == playerstate.invincible && donthaveEye)
-        {
-            rb.linearVelocity = -dir * speed;
-        }
-        else if (state == playerstate.invincible && !donthaveEye)
-        {
-            rb.linearVelocity = dir * speed;
+            case playerstate.idle:
+                rb.linearVelocity = dir * speed;
+                break;
+            case playerstate.confused:
+                rb.linearVelocity = -dir * speed;
+                break;
+            case playerstate.invincible:
+                rb.linearVelocity = (donthaveEye ? -dir : dir) * speed;
+                break;
+            case playerstate.stuck:
+            case playerstate.prelaunch:
+            case playerstate.launch:
+                rb.linearVelocity = Vector2.zero;
+                break;
         }
     }
+
+    // --- Attaque (gel) ---
 
     public void AttackDebut(InputAction.CallbackContext context)
     {
-        if (state == playerstate.invincible || state == playerstate.stuck) { return; }
-        if (state == playerstate.prelaunch)
-        {
-            animatorClim.SetTrigger("Launch");
-        }
-        else
-        {
-            animatorClim.SetBool("Frost", true);
-        }
+        if (state == playerstate.invincible || state == playerstate.stuck) return;
+        if (timerbarFrost < timeBarFrost) return; // jauge pas encore rechargée
+
+        timerbarFrost = 0f;
+        animatorClim.SetBool("Frost", true);
+        Geler();
     }
+
     public void AttackFin(InputAction.CallbackContext context)
     {
-        if (state == playerstate.prelaunch)
-        {
+        animatorClim.SetBool("Frost", false);
+    }
 
-        }
-        else
-        {
-            animatorClim.SetBool("Frost", false);
-        }
-    }
-    public void preLaunchDebut(InputAction.CallbackContext context)
-    {
-        if (state == playerstate.confused || state == playerstate.prelaunch || state == playerstate.launch || donthaveEye || state == playerstate.invincible || state == playerstate.stuck) { return; }
-        animatorClim.SetBool("Prelaunch", true);
-    }
-    public void preLaunchFin(InputAction.CallbackContext context)
-    {
-        if (state == playerstate.confused) { return; }
-        animatorClim.SetBool("Prelaunch", false);
-    }
+    // --- Déguisement ---
 
     public void Deguiser(float duree)
     {
-        // Un nouveau déguisement relance le chrono au lieu de se couper trop tôt
         if (deguisement != null) StopCoroutine(deguisement);
         deguisement = StartCoroutine(Deguisement(duree));
     }
@@ -366,40 +307,37 @@ public class player : MonoBehaviour
         imper.SetActive(true);
         lunettes.SetActive(true);
     }
+
+    // --- Inputs ---
+
     private void OnEnable()
     {
         inputPlayer.actions.FindAction("Attack").started += AttackDebut;
         inputPlayer.actions.FindAction("Attack").canceled += AttackFin;
-        inputPlayer.actions.FindAction("Jump").started += preLaunchDebut;
-        inputPlayer.actions.FindAction("Jump").canceled += preLaunchFin;
+        inputPlayer.actions.FindAction("Jump").started += LancerOeil;
     }
 
     private void OnDisable()
     {
         inputPlayer.actions.FindAction("Attack").started -= AttackDebut;
         inputPlayer.actions.FindAction("Attack").canceled -= AttackFin;
-        inputPlayer.actions.FindAction("Jump").started -= preLaunchDebut;
-        inputPlayer.actions.FindAction("Jump").canceled -= preLaunchFin;
+        inputPlayer.actions.FindAction("Jump").started -= LancerOeil;
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         move = context.ReadValue<Vector2>();
     }
-    public void Look(InputAction.CallbackContext context)
-    {
-        if (inputPlayer.currentControlScheme == "Gamepad")
-        {
-            look = context.ReadValue<Vector2>();
-        }
-        else
-        {
-            look = camera.ScreenToWorldPoint(context.ReadValue<Vector2>());
-        }
-    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position - new Vector3(0, GetComponent<CapsuleCollider2D>().size.y / 2, 0), radiusDetectGround);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, rayonGel);
     }
 }

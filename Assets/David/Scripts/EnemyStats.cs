@@ -3,7 +3,6 @@ using UnityEngine.AI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.Android;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyStats : MonoBehaviour
@@ -11,18 +10,22 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private float maxHealth = 10f;
     [SerializeField] private float baseSpeed = 3.5f;
 
+    [Header("Affichage des dégâts")]
+    [SerializeField] private float hauteurPopup = 1f;
+    [SerializeField] private Color couleurPopup = Color.white;
+
     public float MaxHealth => maxHealth;
     public float Health { get; private set; }
     public float BaseSpeed => baseSpeed;
     public float Speed => agent.speed;
     public bool IsDead => Health <= 0f;
-    public float speeddebase;//pour les particules
+    public float speeddebase; // pour les particules
 
     public event Action<EnemyStats> OnDeath;
 
     public NavMeshAgent agent;
     private readonly List<float> modificateurs = new List<float>();
-    
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -37,7 +40,10 @@ public class EnemyStats : MonoBehaviour
     {
         if (IsDead || amount <= 0f) return;
 
-        Health = Mathf.Max(Health - amount, 0f);
+        float subis = Mathf.Min(amount, Health);
+        Health -= subis;
+        DamagePopup.Creer(transform.position + Vector3.up * hauteurPopup, subis, couleurPopup);
+
         if (IsDead) Die();
     }
 
@@ -55,7 +61,6 @@ public class EnemyStats : MonoBehaviour
 
     // --- Vitesse ---
 
-    // Change la vitesse de base (permanent)
     public void SetBaseSpeed(float value)
     {
         baseSpeed = Mathf.Max(value, 0f);
@@ -85,10 +90,6 @@ public class EnemyStats : MonoBehaviour
         float v = baseSpeed;
         foreach (float m in modificateurs) v *= m * gameManager.instance.animatorSpeed;
         agent.speed = v;
-    }
-    private void Update()
-    {
-        
     }
 
     // --- Mort ---
