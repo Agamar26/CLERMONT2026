@@ -73,6 +73,7 @@ public class player : MonoBehaviour
     public List<SonEtat> sonsEtats = new List<SonEtat>();
 
     public bool EstMort => health <= 0f;
+    public bool EstDeguise { get; private set; }
 
     private Coroutine deguisement;
     private playerstate etatPrecedent;
@@ -82,7 +83,7 @@ public class player : MonoBehaviour
     private SpriteRenderer[] sprites;
     private Color[] couleursOrigine;
     private bool clignoteRouge;
-    
+
     void Start()
     {
         Time.timeScale = 1f;
@@ -183,7 +184,8 @@ public class player : MonoBehaviour
 
     private void VerifierContacts()
     {
-        if (EstMort || invulTimer > 0f || state == playerstate.invincible) return;
+        // Déguisé : pas reconnu, donc pas de dégâts
+        if (EstMort || EstDeguise || invulTimer > 0f || state == playerstate.invincible) return;
 
         foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, rayonContact))
         {
@@ -388,6 +390,7 @@ public class player : MonoBehaviour
         chapeau.SetActive(false);
         imper.SetActive(false);
         lunettes.SetActive(false);
+        EstDeguise = false;
     }
 
     public void Show()
@@ -395,6 +398,7 @@ public class player : MonoBehaviour
         chapeau.SetActive(true);
         imper.SetActive(true);
         lunettes.SetActive(true);
+        EstDeguise = true;
     }
 
     // --- Inputs ---

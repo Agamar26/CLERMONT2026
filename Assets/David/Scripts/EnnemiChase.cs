@@ -124,7 +124,7 @@ public class EnnemiChase : MonoBehaviour
 
             case State.Stun:
                 stunTimer -= Time.deltaTime;
-                if (stunTimer <= 0f) SetState(State.Chase);
+                if (stunTimer <= 0f) SetState(JoueurDetecte() ? State.Chase : State.Idle);
                 break;
 
             case State.Die:
@@ -200,9 +200,10 @@ public class EnnemiChase : MonoBehaviour
         }
     }
 
+    // Joueur déguisé = invisible pour les ennemis : ils repassent en Idle
     private bool JoueurDetecte()
     {
-        if (player.instance == null) return false;
+        if (player.instance == null || player.instance.EstDeguise) return false;
         if (rayonDetection <= 0f) return true;
 
         bool engage = state == State.Chase || state == State.Photo;
