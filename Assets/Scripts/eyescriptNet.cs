@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Photon.Pun;
+using UnityEditor.UIElements;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
@@ -24,10 +25,14 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsMasterClient) { return; }
 
-        for (int i = 0; i < origin.Count; i++)
+        if(origin != null && origin.Count != 0 )
         {
-            Debug.DrawRay(origin[i], direction[i], Color.red);
+            for (int i = 0; i < origin.Count; i++)
+            {
+                Debug.DrawRay(origin[i], direction[i], Color.red);
+            }
         }
+      
     }
     public void launchBall()
     {

@@ -449,7 +449,7 @@ MonoBehaviour:
   launchTime: 5
   launchTimer: 0
   currentstateName: 
-  textlaunch: {fileID: 404305652}
+  textTimer: {fileID: 404305652}
 --- !u!114 &631056146
 MonoBehaviour:
   m_ObjectHideFlags: 0
