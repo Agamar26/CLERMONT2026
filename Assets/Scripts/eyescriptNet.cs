@@ -36,7 +36,17 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     public void launchBall()
     {
         if (!PhotonNetwork.IsMasterClient) { return; }
-        float esds = Random.Range(0, 360);
+        int random = Random.Range(0, 2);
+        float esds = 5;
+        if (random == 0)
+        {
+             esds = Random.Range(-50,50);
+        }
+        else
+        {
+            esds = Random.Range(-130, -230);
+        }
+
         GetComponent<Rigidbody2D>().linearVelocity = Quaternion.Euler(0,0, esds) *  Vector2.right * (forceLaunch);
         origin.Add(transform.position);
     }
