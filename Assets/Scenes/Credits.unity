@@ -687,7 +687,53 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<size=140%>LACLIM : A la Fraiche</size>\r\n\r\n\r\n\r\n<size=70%>PROGRAMMATION</size>\r\nDavid \"Kootoapin\" Abruzzo\r\nAgamar\r\n\r\n\r\n<size=70%>2D ARTISTS</size>\r\nPiou San\r\nFiona Gerolt\r\n\r\n\r\n<size=70%>GAME & LEVEL DESIGN</size>\r\nKeromas\r\n\r\n\r\n<size=70%>GAME DESIGN & MUSIQUE</size>\r\nCElia Jaunet\r\n\r\n\r\n\r\n<size=120%>MERCI D'AVOIR JOU\xC9 !</size>"
+  m_text: '<size=140%>LACLIM : A la Fraiche</size>
+
+    
+
+    
+
+    
+
+    <size=70%>PROGRAMMATION</size>
+
+    David "Kootoapin" Abruzzo
+
+    Agamar
+
+    
+
+    
+
+    <size=70%>2D ARTISTS</size>
+
+    Piou San
+
+    Fiona Gerolt
+
+    
+
+    
+
+    <size=70%>GAME & LEVEL DESIGN</size>
+
+    Keromas
+
+    
+
+    
+
+    <size=70%>GAME DESIGN & MUSIQUE</size>
+
+    CElia Jaunet
+
+    
+
+    
+
+    
+
+    <size=120%>MERCI D''AVOIR JOUE !</size>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc7ca842fe20606469672bf255469916, type: 2}
   m_sharedMaterial: {fileID: 2265157571239278081, guid: cc7ca842fe20606469672bf255469916, type: 2}
