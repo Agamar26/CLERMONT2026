@@ -4076,15 +4076,15 @@ PrefabInstance:
       objectReference: {fileID: 785012334}
     - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
       propertyPath: tailleMax
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
       propertyPath: tailleMin
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
       propertyPath: maxEnemies
-      value: 100
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5753162807267550913, guid: 95009cf37563d084a9faa1eacccf43ba, type: 3}
       propertyPath: vitesseMax
