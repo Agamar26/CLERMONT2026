@@ -20920,7 +20920,7 @@ RectTransform:
   m_GameObject: {fileID: 1150379389}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_LocalScale: {x: 0.51, y: 0.51, z: 0.51}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1786409642}
@@ -20929,7 +20929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 327, y: -148.83}
+  m_AnchoredPosition: {x: 200, y: -148.83}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150379391
@@ -29823,7 +29823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: debutmessagemission
-      value: Trouver et ramener
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: objCourses.Array.size
@@ -35882,6 +35882,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 112912378809900281, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1080661141539113270, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231840900386327608, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563572190020239549, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_text
+      value: Courses pour Mamie
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563572190020239549, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_fontSize
+      value: 22.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563572190020239549, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.055268794
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563572190020239549, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.055268794
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563572190020239549, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.05660379
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563572190020239549, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 22.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1563572190020239549, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4279111182
+      objectReference: {fileID: 0}
     - target: {fileID: 1857307758764406053, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
       propertyPath: m_Type
       value: 0
@@ -35897,6 +35937,10 @@ PrefabInstance:
     - target: {fileID: 5280249171020128493, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899443758995855143, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7288724011834110783, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
       propertyPath: m_Pivot.x
