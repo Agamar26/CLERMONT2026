@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using ExitGames.Client.Photon.StructWrapping;
 using Photon.Pun;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -12,6 +14,7 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     public float timerCanGetBall;
     public LayerMask nulllayermask;
     public int plusball;
+    public int actornumber;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -45,10 +48,12 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     {
        if(PhotonNetwork.IsMasterClient)
         {
+            
             if(collision.gameObject.tag != "Death")
             {
                 if (collision.gameObject.tag == "Player")
                 {
+                    actornumber = collision.gameObject.GetComponent<PhotonView>().OwnerActorNr;
                     plusball++;
                     Vector2 contact = collision.contacts[0].point;
                     Vector2 eze = Vector2.Reflect((contact - origin[origin.Count - 1]).normalized, collision.contacts[0].normal);
@@ -69,9 +74,20 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
             }
             if (collision.gameObject.tag == "Death")
             {
-                PhotonNetwork.Destroy(this.gameObject);
+                var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
+                if(collision.gameObject.transform.position.x > 0)
+                {
+                    GameObject joueurDroite = ezez.FirstOrDefault(a => a.transform.position.x > 0);
+                     ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+                    hash.Add("Score", "45454545");
+                   var ezs = PhotonNetwork.CurrentRoom.GetPlayer(joueurDroite.GetComponent<playerNet>().actornumber, true).SetCustomProperties(hash);
+
+                }
+               
                 networkManager.instance.currentstateName = "respawnball";
                 networkManager.instance.state = networkManager.stateGame.respawnball;
+                PhotonNetwork.Destroy(this.gameObject);
+              
             }
             
         }
