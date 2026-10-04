@@ -20442,7 +20442,7 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -29768,7 +29768,7 @@ PrefabInstance:
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: lifeBar
       value: 
-      objectReference: {fileID: 1885437200}
+      objectReference: {fileID: 1100870435}
     - target: {fileID: 3746513620174423695, guid: 8c1c11db014fa614b8a08a644cfeac0b, type: 3}
       propertyPath: FrostBar
       value: 
@@ -36017,17 +36017,6 @@ PrefabInstance:
       addedObject: {fileID: 1150379390}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
---- !u!114 &1885437200 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1438424032223804236, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
-  m_PrefabInstance: {fileID: 1885437199}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1 &1885437201 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5023548369795653320, guid: e9c2dc527161778479b6c7055a40f7db, type: 3}
