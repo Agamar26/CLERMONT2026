@@ -1167,8 +1167,8 @@ MonoBehaviour:
   audioyar: {fileID: 157253706}
   yes: {fileID: 1967739286}
   no: {fileID: 37913159}
-  collidergauche: {fileID: 0}
-  colliderdroite: {fileID: 0}
+  collidergauche: {fileID: 951551375}
+  colliderdroite: {fileID: 1333898136}
 --- !u!114 &631056146
 MonoBehaviour:
   m_ObjectHideFlags: 0
