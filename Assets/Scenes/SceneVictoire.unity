@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64ac125e16e54b4295668feee82de7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuPrincipal
-  sceneJeu: Menu
+  sceneJeu: Credits
   panelMenu: {fileID: 1156108699}
   panelOptions: {fileID: 0}
   panelCredits: {fileID: 0}
@@ -653,6 +653,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1783255814359327984, guid: 5a77f44301fc9f64ba7035d864849b59, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976731824820356681, guid: 5a77f44301fc9f64ba7035d864849b59, type: 3}
+      propertyPath: m_text
+      value: 'Continuer
+
+'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4976731824820356681, guid: 5a77f44301fc9f64ba7035d864849b59, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: cc7ca842fe20606469672bf255469916, type: 2}
+    - target: {fileID: 4976731824820356681, guid: 5a77f44301fc9f64ba7035d864849b59, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 2265157571239278081, guid: cc7ca842fe20606469672bf255469916, type: 2}
+    - target: {fileID: 4976731824820356681, guid: 5a77f44301fc9f64ba7035d864849b59, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6063662000041017791, guid: 5a77f44301fc9f64ba7035d864849b59, type: 3}
