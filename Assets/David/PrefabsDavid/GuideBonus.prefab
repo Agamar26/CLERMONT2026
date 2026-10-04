@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BonusGuide
   duree: 4
-  son: {fileID: 0}
+  son: {fileID: 8300000, guid: e3900cfcb08df8842ab8c8d8d4c49e36, type: 3}
   volume: 1
 --- !u!58 &6403587351035375656
 CircleCollider2D:
