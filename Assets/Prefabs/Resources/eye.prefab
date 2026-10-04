@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1914834133220252992}
   - component: {fileID: 3720501695139735592}
   - component: {fileID: 2071858705345121879}
-  - component: {fileID: 495950641742765592}
+  - component: {fileID: 857509266897295517}
   m_Layer: 0
   m_Name: eye
   m_TagString: Oeil
@@ -220,11 +220,11 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 495950641742765592}
+  - {fileID: 857509266897295517}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &495950641742765592
+--- !u!114 &857509266897295517
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -233,10 +233,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5008511392742140584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonRigidbody2DView
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  m_EditorClassIdentifier: PhotonUnityNetworking::Photon.Pun.PhotonTransformView
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
