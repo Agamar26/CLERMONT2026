@@ -2778,7 +2778,7 @@ MonoBehaviour:
   - {fileID: 1396851167256274095, guid: c4650b533f516fb4594a7902f508481d, type: 3}
   - {fileID: 3491668467839160949, guid: 37157fae719599f4d98b758a3f68d3c8, type: 3}
   - {fileID: 5504520936322268276, guid: 19da4392c8891d947bd7cdcac50ad979, type: 3}
-  intervalleMin: 0.6
+  intervalleMin: 0.7
   intervalleMax: 2
   vitesseMin: 3
   vitesseMax: 5
