@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EcranMort : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class EcranMort : MonoBehaviour
     public float angleCri = -6f;          // inclinaison BD
     public float dureeAffichage = 3f;
 
+    [Header("Image de game over")]
+    public Image imageHopital;            // HORS du panneau, sinon elle s'efface avec lui
+    public float dureeImage = 3f;
+
     void Start()
     {
         if (joueur == null) joueur = FindFirstObjectByType<player>();
@@ -31,6 +36,8 @@ public class EcranMort : MonoBehaviour
 
         panneau.alpha = 0f;
         panneau.blocksRaycasts = false;
+
+        if (imageHopital != null) SetAlpha(imageHopital, 0f);
     }
 
     void OnDestroy()
@@ -69,6 +76,31 @@ public class EcranMort : MonoBehaviour
         cri.localScale = Vector3.one;
 
         yield return new WaitForSecondsRealtime(dureeAffichage);
+
+        // Fondu croisé : le message s'efface, l'image apparaît
+        if (imageHopital != null)
+        {
+            for (float t = 0f; t < dureeFondu; t += Time.unscaledDeltaTime)
+            {
+                float k = t / dureeFondu;
+                panneau.alpha = 1f - k;
+                SetAlpha(imageHopital, k);
+                yield return null;
+            }
+            panneau.alpha = 0f;
+            SetAlpha(imageHopital, 1f);
+
+            yield return new WaitForSecondsRealtime(dureeImage);
+        }
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    // Ne touche qu'à l'alpha : garde la couleur réglée dans l'inspector
+    private static void SetAlpha(Graphic g, float a)
+    {
+        Color c = g.color;
+        c.a = a;
+        g.color = c;
     }
 }
