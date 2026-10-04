@@ -1160,7 +1160,7 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   state: 0
   ball: {fileID: 5008511392742140584, guid: dae2be2f3dd191f41b2ce43a2b78f6bd, type: 3}
-  launchTime: 5
+  launchTime: 3
   launchTimer: 0
   currentstateName: compteuravantlancement
   textTimer: {fileID: 404305652}
