@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class pauseScript : MonoBehaviour
+public class pauseScript : MonoBehaviourPunCallbacks
 {
     public GameObject panelPause;
     public GameObject premierBouton;          // bouton Reprendre
@@ -45,7 +45,8 @@ public class pauseScript : MonoBehaviour
     }
     public void changescene()
     {
-        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.Disconnect();
+        //PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(sceneMenu);
     }
     public void Reprendre()
