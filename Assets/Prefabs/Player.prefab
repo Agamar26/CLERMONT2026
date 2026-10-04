@@ -4254,8 +4254,10 @@ MonoBehaviour:
     boucle: 0
     volume: 0
   audioActions: {fileID: 0}
-  sonGel: {fileID: 0}
+  sonGel: {fileID: 8300000, guid: 56d7c93840b71004e89b4b8eb67d1e25, type: 3}
   sonLancer: {fileID: 0}
+  sonDegats: {fileID: 8300000, guid: 386830de183a18049b39c22385c11345, type: 3}
+  sonMort: {fileID: 8300000, guid: db7f3ca6b96daa44296883f744976708, type: 3}
   volumeActions: 1
   variationPitch: 0.08
 --- !u!70 &1416406998375815715

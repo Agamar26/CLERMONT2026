@@ -80,6 +80,8 @@ public class player : MonoBehaviour
     public AudioSource audioActions;      // créée automatiquement si vide
     public AudioClip sonGel;
     public AudioClip sonLancer;
+    public AudioClip sonDegats;
+    public AudioClip sonMort;             // si vide : sonDegats au coup fatal
     [Range(0f, 1f)] public float volumeActions = 1f;
     [Range(0f, 0.3f)] public float variationPitch = 0.08f;
 
@@ -220,8 +222,16 @@ public class player : MonoBehaviour
         invulTimer = dureeInvulnerabilite;
         Debug.Log($"Joueur touché : -{amount} → {health}/{maxHealth}");
 
-        if (EstMort) Mourir();
-        else animatorClim.SetTrigger("Hurt");
+        if (EstMort)
+        {
+            JouerSon(sonMort != null ? sonMort : sonDegats);
+            Mourir();
+        }
+        else
+        {
+            JouerSon(sonDegats);
+            animatorClim.SetTrigger("Hurt");
+        }
     }
 
     public void Heal(float amount)
