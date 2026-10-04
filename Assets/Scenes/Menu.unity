@@ -7630,7 +7630,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Multijoueur
+  m_text: Bonus Multijoueur
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cc7ca842fe20606469672bf255469916, type: 2}
   m_sharedMaterial: {fileID: 2265157571239278081, guid: cc7ca842fe20606469672bf255469916, type: 2}
