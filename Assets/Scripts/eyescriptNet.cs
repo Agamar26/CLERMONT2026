@@ -58,11 +58,27 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
             if (joueurDroite.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
             {
                 networkManager.instance.no.Play();
+                foreach (var item in ezez)
+                {
+                    if (item.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                    {
+                        item.GetComponentInChildren<Animator>().SetTrigger("Scored");
+                    }
+                }
             }
             else
             {
                 networkManager.instance.yes.Play();
+                foreach (var item in ezez)
+                {
+                    if (item.GetComponent<playerNet>().actornumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                    {
+                        item.GetComponentInChildren<Animator>().SetTrigger("Scored");
+                    }
+                }
             }
+           
+            
         }
 
        if(PhotonNetwork.IsMasterClient)
@@ -102,9 +118,11 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
                      //ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
                     //hash.Add("Score", inta.ToString());
                     PhotonNetwork.CurrentRoom.GetPlayer(joueurDroite.GetComponent<playerNet>().actornumber, true).SetCustomProperties(ezefffz);
-
                 
-               
+                
+
+
+
                 networkManager.instance.currentstateName = "respawnball";
                 networkManager.instance.state = networkManager.stateGame.respawnball;
                 PhotonNetwork.Destroy(this.gameObject);
