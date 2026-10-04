@@ -4,6 +4,7 @@ using ExitGames.Client.Photon.StructWrapping;
 using Photon.Pun;
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class eyescriptNet : MonoBehaviourPunCallbacks
 {
@@ -14,12 +15,14 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     public LayerMask nulllayermask;
     public int plusball;
     public int actornumber;
+    public float scale = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (!PhotonNetwork.IsMasterClient) { return; }
+        scale = transform.localScale.x;
 
-       
+
     }
 
     // Update is called once per frame
@@ -38,60 +41,7 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
         origin.Add(transform.position);
     }
 
-    [PunRPC]
-    public void PlayingSound(string tagname,string leftorright)
-    {
-        if (tagname == "Player")
-        {
-            networkManager.instance.audioyar.Play();
-        }
-        var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
-        var ezeqssqsq = networkManager.instance.collidergauche;
-        if(leftorright == "left")
-        {
-            ezeqssqsq = networkManager.instance.collidergauche;
-        }
-        else
-        {
-            ezeqssqsq = networkManager.instance.colliderdroite;
-
-        }
-            GameObject joueurDroite = ezez
-                                .OrderBy(a => Vector2.Distance(
-                                    a.transform.position,
-                                    ezeqssqsq.gameObject.transform.position
-                                ))
-                                .LastOrDefault();
-        if (tagname == "Death")
-        {
-
-            if (joueurDroite.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
-            {
-                networkManager.instance.no.Play();
-                foreach (var item in ezez)
-                {
-                    if (item.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
-                    {
-                        item.GetComponentInChildren<Animator>().SetTrigger("Scored");
-                    }
-                }
-            }
-            else
-            {
-                networkManager.instance.yes.Play();
-                foreach (var item in ezez)
-                {
-                    if (item.GetComponent<playerNet>().actornumber == PhotonNetwork.LocalPlayer.ActorNumber)
-                    {
-                        item.GetComponentInChildren<Animator>().SetTrigger("Scored");
-                    }
-                }
-            }
-
-
-        }
-
-    }
+   
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -109,17 +59,34 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
         {
             if (collision.gameObject.tag == "Player")
             {
-                photonView.RPC("PlayingSound", RpcTarget.AllViaServer, "Player","left");
+                scale -= 0.2f;
+                transform.localScale = new Vector3(scale, scale, scale);
+                networkManager.instance.photonView.RPC(
+    "PlayingSound",
+    RpcTarget.AllViaServer,
+    "Player",
+    "Left"
+);
             }
             if (collision.gameObject.tag == "Death")
             {
                 if (collision.gameObject == networkManager.instance.colliderdroite)
                 {
-                    photonView.RPC("PlayingSound", RpcTarget.AllViaServer, "Death", "Right");
+                                    networkManager.instance.photonView.RPC(
+                    "PlayingSound",
+                    RpcTarget.AllViaServer,
+                    "Death",
+                    "right"
+                );
                 }
                 else
                 {
-                    photonView.RPC("PlayingSound", RpcTarget.AllViaServer, "Death", "Left");
+                    networkManager.instance.photonView.RPC(
+    "PlayingSound",
+    RpcTarget.AllViaServer,
+    "Death",
+    "left"
+);
                 }
 
 

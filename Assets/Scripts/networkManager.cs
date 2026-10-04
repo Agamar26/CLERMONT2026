@@ -124,7 +124,70 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
         }
 
     }
+    [PunRPC]
+    public void PlayingSound(string tagname, string leftorright)
+    {
+        if (tagname == "Player")
+        {
+            networkManager.instance.audioyar.Play();
+            var ezeze = GameObject.FindGameObjectsWithTag("Oeil");
+            foreach (var item in ezeze)
+            {
+                if(item.GetComponent<Animator>() != null)
+                {
+                    item.GetComponent<Animator>().SetTrigger("Bump");
+                }
+               
+            }
+           
+        }
+        var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
+        var ezeqssqsq = networkManager.instance.collidergauche;
+        if (leftorright == "left")
+        {
+            ezeqssqsq = networkManager.instance.collidergauche;
+        }
+        else
+        {
+            ezeqssqsq = networkManager.instance.colliderdroite;
 
+        }
+        GameObject joueurDroite = ezez
+                            .OrderBy(a => Vector2.Distance(
+                                a.transform.position,
+                                ezeqssqsq.gameObject.transform.position
+                            ))
+                            .LastOrDefault();
+        if (tagname == "Death")
+        {
+
+            if (joueurDroite.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                networkManager.instance.no.Play();
+                foreach (var item in ezez)
+                {
+                    if (item.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
+                    {
+                        item.GetComponentInChildren<Animator>().SetTrigger("Scored");
+                    }
+                }
+            }
+            else
+            {
+                networkManager.instance.yes.Play();
+                foreach (var item in ezez)
+                {
+                    if (item.GetComponent<playerNet>().actornumber == PhotonNetwork.LocalPlayer.ActorNumber)
+                    {
+                        item.GetComponentInChildren<Animator>().SetTrigger("Scored");
+                    }
+                }
+            }
+
+
+        }
+
+    }
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         base.OnPlayerEnteredRoom(newPlayer);
