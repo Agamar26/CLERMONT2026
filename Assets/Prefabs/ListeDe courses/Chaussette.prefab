@@ -83,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 8
+  m_SortingOrder: 12
   m_MaskInteraction: 0
   m_Sprite: {fileID: 8434725330008855768, guid: 6c55144e5842a954c93105234d1a7197, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -201,7 +201,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 3.77
+  m_Radius: 4
 --- !u!1 &9119621150684986648
 GameObject:
   m_ObjectHideFlags: 0

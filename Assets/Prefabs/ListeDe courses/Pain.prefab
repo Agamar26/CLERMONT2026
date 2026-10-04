@@ -83,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 12
   m_MaskInteraction: 0
   m_Sprite: {fileID: -2998101987992766890, guid: 711bafa3818e3ed4eb51a780e65845ac, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -166,6 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::objToGet
   nameOfObj: Pain
+  sonRamassage: {fileID: 0}
+  volume: 1
+  indexCourse: -1
 --- !u!58 &6340402575013602908
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -201,7 +204,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.49
+  m_Radius: 4
 --- !u!1 &5954515804475510760
 GameObject:
   m_ObjectHideFlags: 0

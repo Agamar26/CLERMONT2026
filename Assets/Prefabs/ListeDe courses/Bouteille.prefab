@@ -217,6 +217,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   nameOfObj: Bouteille
+  sonRamassage: {fileID: 0}
+  volume: 1
+  indexCourse: -1
 --- !u!70 &4569949342515670446
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -289,4 +292,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.49
+  m_Radius: 4
