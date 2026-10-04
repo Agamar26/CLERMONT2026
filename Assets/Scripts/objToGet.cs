@@ -19,10 +19,9 @@ public class objToGet : MonoBehaviour
 
         gm.objCoursesToGetTaken[indexCourse] = true;
 
-        // Joué à la position de la caméra : PlayClipAtPoint crée un son 3D,
-        // qui serait atténué s'il partait de l'objet (caméra éloignée en Z)
-        if (sonRamassage != null)
-            AudioSource.PlayClipAtPoint(sonRamassage, Camera.main.transform.position, volume);
+        // Son 2D joué sur la source du joueur : pas d'atténuation, et il survit au Destroy
+        if (sonRamassage != null && player.instance != null && player.instance.audioActions != null)
+            player.instance.audioActions.PlayOneShot(sonRamassage, volume);
 
         Destroy(gameObject);
     }

@@ -14,6 +14,11 @@ public class gameManager : MonoBehaviour
     public List<GameObject> objCoursesToGetTakenUI = new List<GameObject>();
     public string debutmessagemission;
     public int numberOfTasks;
+
+    [Header("Couleurs de la liste de courses")]
+    public Color couleurPrise = Color.green;
+    public Color couleurAPrendre = Color.red;
+
     public GameObject prefMissionUI;
     public GameObject containeruitasks;
     public LayerMask layerPlayer;
@@ -83,11 +88,11 @@ public class gameManager : MonoBehaviour
             if (objCoursesToGetTaken[i])
             {
                 dffd++;
-                objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.green;
+                objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = couleurPrise;
             }
             else
             {
-                objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
+                objCoursesToGetTakenUI[i].GetComponentInChildren<TextMeshProUGUI>().color = couleurAPrendre;
             }
         }
 

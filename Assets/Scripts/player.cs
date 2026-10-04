@@ -80,8 +80,8 @@ public class player : MonoBehaviour
     public AudioSource audioActions;      // créée automatiquement si vide
     public AudioClip sonGel;
     public AudioClip sonLancer;
-    public AudioClip sonDegats;
-    public AudioClip sonMort;             // si vide : sonDegats au coup fatal
+    public AudioClip[] sonsDegats;        // tiré au hasard à chaque coup
+    public AudioClip sonMort;             // si vide : un son de dégâts au coup fatal
     [Range(0f, 1f)] public float volumeActions = 1f;
     [Range(0f, 0.3f)] public float variationPitch = 0.08f;
 
@@ -96,6 +96,7 @@ public class player : MonoBehaviour
     private SpriteRenderer[] sprites;
     private Color[] couleursOrigine;
     private bool clignoteRouge;
+    private int dernierSonDegats = -1;
 
     void Start()
     {
@@ -224,14 +225,26 @@ public class player : MonoBehaviour
 
         if (EstMort)
         {
-            JouerSon(sonMort != null ? sonMort : sonDegats);
+            JouerSon(sonMort != null ? sonMort : SonDegatsAuHasard());
             Mourir();
         }
         else
         {
-            JouerSon(sonDegats);
+            JouerSon(SonDegatsAuHasard());
             animatorClim.SetTrigger("Hurt");
         }
+    }
+
+    // Tirage au hasard, sans répéter deux fois de suite le même son
+    private AudioClip SonDegatsAuHasard()
+    {
+        if (sonsDegats == null || sonsDegats.Length == 0) return null;
+        if (sonsDegats.Length == 1) return sonsDegats[0];
+
+        int i = Random.Range(0, sonsDegats.Length - 1);
+        if (i >= dernierSonDegats && dernierSonDegats >= 0) i++; // saute le dernier joué
+        dernierSonDegats = i;
+        return sonsDegats[i];
     }
 
     public void Heal(float amount)
