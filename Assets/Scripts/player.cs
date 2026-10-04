@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 public class player : MonoBehaviour
@@ -51,6 +52,9 @@ public class player : MonoBehaviour
     [Header("Gel de zone")]
     public float rayonGel = 3f;
     public float dureeGel = 2f;
+    public float degatsGel = 10f;
+    public float distancePoussee = 1.5f;
+    public float dureePoussee = 0.25f;
 
     [Header("Caddie")]
     public float rayonCaddie = 1f;
@@ -270,7 +274,7 @@ public class player : MonoBehaviour
         }
     }
 
-    // --- Gel de zone : instantané, sans bloquer le déplacement ---
+    // --- Gel de zone : gèle, blesse et repousse, sans bloquer le déplacement ---
 
     public void LancerGel(InputAction.CallbackContext context)
     {
@@ -288,7 +292,20 @@ public class player : MonoBehaviour
         foreach (Collider2D col in Physics2D.OverlapCircleAll(transform.position, rayonGel))
         {
             EnnemiChase ennemi = col.GetComponentInParent<EnnemiChase>();
-            if (ennemi != null && touches.Add(ennemi)) ennemi.Geler(dureeGel);
+            if (ennemi == null || !touches.Add(ennemi)) continue;
+
+            ennemi.Geler(dureeGel);
+
+            EnemyStats stats = ennemi.GetComponentInParent<EnemyStats>();
+            if (stats != null && !stats.IsDead)
+            {
+                stats.TakeDamage(degatsGel);
+                if (stats == null || stats.IsDead) continue; // mort sur le coup : pas de poussée
+            }
+
+            Vector2 dir = ennemi.transform.position - transform.position;
+            if (dir.sqrMagnitude < 0.0001f) dir = derniereDirection; // pile sur le joueur
+            StartCoroutine(Repousser(ennemi.transform, dir.normalized));
         }
 
         // Les particules s'arrêtent pile au bord de la zone : distance = vitesse × durée de vie
@@ -299,6 +316,31 @@ public class player : MonoBehaviour
             var main = ps.main;
             main.startSpeed = rayonGel / main.startLifetime.constant;
             ps.Play();
+        }
+    }
+
+    // Poussée en ease-out ; via le NavMeshAgent si présent pour ne pas traverser les murs
+    private IEnumerator Repousser(Transform cible, Vector2 dir)
+    {
+        NavMeshAgent agent = cible.GetComponent<NavMeshAgent>();
+        Rigidbody2D corps = cible.GetComponent<Rigidbody2D>();
+        float t = 0f, parcouru = 0f;
+
+        while (t < dureePoussee)
+        {
+            if (cible == null) yield break; // détruit entre-temps
+
+            t += Time.deltaTime;
+            float k = 1f - Mathf.Pow(1f - Mathf.Clamp01(t / dureePoussee), 2f);
+            float pas = k * distancePoussee - parcouru;
+            parcouru += pas;
+            Vector2 delta = dir * pas;
+
+            if (agent != null && agent.enabled && agent.isOnNavMesh) agent.Move(delta);
+            else if (corps != null) corps.position += delta;
+            else cible.position += (Vector3)delta;
+
+            yield return null;
         }
     }
 
