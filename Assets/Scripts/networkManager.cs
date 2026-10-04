@@ -4,7 +4,6 @@ using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +24,8 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
     public AudioSource audioyar;
     public AudioSource yes;
     public AudioSource no;
+    public GameObject collidergauche;
+    public GameObject colliderdroite;
     void Start()
     {
         // Fait spawner le joueur local dès qu'il arrive dans la scène (si déjà dans une salle)

@@ -46,7 +46,6 @@ public class pauseScript : MonoBehaviourPunCallbacks
     public void changescene()
     {
         PhotonNetwork.Disconnect();
-        //PhotonNetwork.LeaveRoom();
         SceneManager.LoadScene(sceneMenu);
     }
     public void Reprendre()

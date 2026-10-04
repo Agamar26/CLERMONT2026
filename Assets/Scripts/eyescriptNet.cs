@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ExitGames.Client.Photon.StructWrapping;
 using Photon.Pun;
-using UnityEditor.UIElements;
+
 using UnityEngine;
-using static UnityEngine.UI.Image;
 
 public class eyescriptNet : MonoBehaviourPunCallbacks
 {
@@ -38,21 +37,32 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
         GetComponent<Rigidbody2D>().linearVelocity = Quaternion.Euler(0,0, esds) *  Vector2.right * (forceLaunch);
         origin.Add(transform.position);
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
 
-        GameObject joueurDroite = ezez
-                            .OrderBy(a => Vector2.Distance(
-                                a.transform.position,
-                                collision.gameObject.transform.position
-                            ))
-                            .LastOrDefault();
-        if (collision.gameObject.tag == "Player")
+    [PunRPC]
+    public void PlayingSound(string tagname,string leftorright)
+    {
+        if (tagname == "Player")
         {
             networkManager.instance.audioyar.Play();
         }
-        if (collision.gameObject.tag == "Death")
+        var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
+        var ezeqssqsq = networkManager.instance.collidergauche;
+        if(leftorright == "left")
+        {
+            ezeqssqsq = networkManager.instance.collidergauche;
+        }
+        else
+        {
+            ezeqssqsq = networkManager.instance.colliderdroite;
+
+        }
+            GameObject joueurDroite = ezez
+                                .OrderBy(a => Vector2.Distance(
+                                    a.transform.position,
+                                    ezeqssqsq.gameObject.transform.position
+                                ))
+                                .LastOrDefault();
+        if (tagname == "Death")
         {
 
             if (joueurDroite.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
@@ -77,14 +87,45 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
                     }
                 }
             }
-           
-            
+
+
         }
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
+
+        GameObject joueurDroite = ezez
+                            .OrderBy(a => Vector2.Distance(
+                                a.transform.position,
+                                collision.gameObject.transform.position
+                            ))
+                            .LastOrDefault();
+        
+      
        if(PhotonNetwork.IsMasterClient)
         {
-            
-            if(collision.gameObject.tag != "Death")
+            if (collision.gameObject.tag == "Player")
+            {
+                photonView.RPC("PlayingSound", RpcTarget.AllViaServer, "Player","left");
+            }
+            if (collision.gameObject.tag == "Death")
+            {
+                if (collision.gameObject == networkManager.instance.colliderdroite)
+                {
+                    photonView.RPC("PlayingSound", RpcTarget.AllViaServer, "Death", "Right");
+                }
+                else
+                {
+                    photonView.RPC("PlayingSound", RpcTarget.AllViaServer, "Death", "Left");
+                }
+
+
+            }
+
+            if (collision.gameObject.tag != "Death")
             {
                 if (collision.gameObject.tag == "Player")
                 {
