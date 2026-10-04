@@ -28,13 +28,7 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsMasterClient) { return; }
 
-        if(origin != null && origin.Count != 0 )
-        {
-            for (int i = 0; i < origin.Count; i++)
-            {
-                Debug.DrawRay(origin[i], direction[i], Color.red);
-            }
-        }
+   
       
     }
     public void launchBall()
@@ -46,6 +40,31 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
+
+        GameObject joueurDroite = ezez
+                            .OrderBy(a => Vector2.Distance(
+                                a.transform.position,
+                                collision.gameObject.transform.position
+                            ))
+                            .LastOrDefault();
+        if (collision.gameObject.tag == "Player")
+        {
+            networkManager.instance.audioyar.Play();
+        }
+        if (collision.gameObject.tag == "Death")
+        {
+
+            if (joueurDroite.GetComponent<playerNet>().actornumber != PhotonNetwork.LocalPlayer.ActorNumber)
+            {
+                networkManager.instance.no.Play();
+            }
+            else
+            {
+                networkManager.instance.yes.Play();
+            }
+        }
+
        if(PhotonNetwork.IsMasterClient)
         {
             
@@ -74,15 +93,17 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
             }
             if (collision.gameObject.tag == "Death")
             {
-                var ezez = GameObject.FindGameObjectsWithTag("Player").ToList();
-                if(collision.gameObject.transform.position.x > 0)
-                {
-                    GameObject joueurDroite = ezez.FirstOrDefault(a => a.transform.position.x > 0);
-                     ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
-                    hash.Add("Score", "45454545");
-                   var ezs = PhotonNetwork.CurrentRoom.GetPlayer(joueurDroite.GetComponent<playerNet>().actornumber, true).SetCustomProperties(hash);
+              
+                    var ezefffz = PhotonNetwork.CurrentRoom.GetPlayer(joueurDroite.GetComponent<playerNet>().actornumber, true).CustomProperties;
+                    var sdd = ezefffz.TryGetValue("Score", out object value);
+                    int ezedddd = int.Parse((string)value);
+                    var inta = ezedddd += 1 ;
+                    ezefffz["Score"] = inta.ToString();
+                     //ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+                    //hash.Add("Score", inta.ToString());
+                    PhotonNetwork.CurrentRoom.GetPlayer(joueurDroite.GetComponent<playerNet>().actornumber, true).SetCustomProperties(ezefffz);
 
-                }
+                
                
                 networkManager.instance.currentstateName = "respawnball";
                 networkManager.instance.state = networkManager.stateGame.respawnball;

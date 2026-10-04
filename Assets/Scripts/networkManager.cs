@@ -4,6 +4,7 @@ using System.Linq;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +22,9 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
     public static networkManager instance;
     public string currentstateName;
     public TextMeshProUGUI textTimer;
+    public AudioSource audioyar;
+    public AudioSource yes;
+    public AudioSource no;
     void Start()
     {
         // Fait spawner le joueur local dès qu'il arrive dans la scène (si déjà dans une salle)
@@ -120,6 +124,13 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
 
     }
 
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+        hash.Add("Score", "0");
+        PhotonNetwork.CurrentRoom.GetPlayer(newPlayer.ActorNumber, true).SetCustomProperties(hash);
+    }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         base.OnPlayerLeftRoom(otherPlayer);

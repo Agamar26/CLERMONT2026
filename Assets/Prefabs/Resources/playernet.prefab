@@ -114,6 +114,8 @@ MonoBehaviour:
   move: {x: 0, y: 0}
   speed: 5
   rb: {fileID: 0}
+  actornumber: 0
+  textscore: {fileID: 2769762730623244432}
 --- !u!114 &6506596875256990444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,6 +468,7 @@ GameObject:
   - component: {fileID: 1473283493289972371}
   - component: {fileID: 5187612153120231695}
   - component: {fileID: 2769762730623244432}
+  - component: {fileID: 3102105998496298997}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -490,7 +493,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0, y: 0}
-  m_SizeDelta: {x: 830.1, y: 808.6}
+  m_SizeDelta: {x: 1877.7, y: 1829}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5187612153120231695
 CanvasRenderer:
@@ -549,8 +552,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 189.2
-  m_fontSizeBase: 189.2
+  m_fontSize: 701
+  m_fontSizeBase: 701
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -594,3 +597,25 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!95 &3102105998496298997
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589417948749596949}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7b191f6ecb7d39e49b5a8617eb711da7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

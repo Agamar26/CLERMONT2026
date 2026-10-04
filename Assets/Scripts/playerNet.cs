@@ -13,9 +13,11 @@ public class playerNet : MonoBehaviourPunCallbacks
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(photonView.IsMine)
+        actornumber = GetComponent<PhotonView>().OwnerActorNr;
+        if (photonView.IsMine)
         {
             rb = GetComponent<Rigidbody2D>();
+            
         } 
         else
         {
@@ -26,10 +28,12 @@ public class playerNet : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        actornumber = GetComponent<PhotonView>().OwnerActorNr;
+        textscore.transform.rotation = Quaternion.Euler(0,0,0);    
         var ezez = PhotonNetwork.CurrentRoom.GetPlayer(actornumber, true).CustomProperties;
         var sdd = ezez.TryGetValue("Score", out object value);
-        textscore.text = (string)value;
-      actornumber = GetComponent<PhotonView>().OwnerActorNr;
+        textscore.text = value.ToString();
+      
     }
 
     private void FixedUpdate()
