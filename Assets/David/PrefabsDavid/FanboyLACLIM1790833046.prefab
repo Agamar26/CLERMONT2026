@@ -330,7 +330,6 @@ MonoBehaviour:
   angleGauche: 180
   rayonDetection: 30
   rayonPerte: 35
-  distancePhoto: 0.35
   margePhoto: 0.3
   stateIdle: Idle
   stateChase: Chase
@@ -340,7 +339,7 @@ MonoBehaviour:
   fondu: 0.1
   couleurGel: {r: 0, g: 0.49673212, b: 1, a: 1}
   intensiteGel: 0.7
-  degatsContact: 1
+  degatsContact: 5
 --- !u!114 &6812074938597055436
 MonoBehaviour:
   m_ObjectHideFlags: 0

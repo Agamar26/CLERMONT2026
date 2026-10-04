@@ -76,6 +76,13 @@ public class player : MonoBehaviour
     public AudioSource audioSource;
     public List<SonEtat> sonsEtats = new List<SonEtat>();
 
+    [Header("Sons d'actions (source séparée : pas coupés par les changements d'état)")]
+    public AudioSource audioActions;      // créée automatiquement si vide
+    public AudioClip sonGel;
+    public AudioClip sonLancer;
+    [Range(0f, 1f)] public float volumeActions = 1f;
+    [Range(0f, 0.3f)] public float variationPitch = 0.08f;
+
     public bool EstMort => health <= 0f;
     public bool EstDeguise { get; private set; }
 
@@ -94,6 +101,9 @@ public class player : MonoBehaviour
         if (instance == null) instance = this;
 
         if (audioSource != null) audioSource.playOnAwake = false;
+        if (audioActions == null) audioActions = gameObject.AddComponent<AudioSource>();
+        audioActions.playOnAwake = false;
+
         if (flecheOeil != null && flecheOeil.joueur == null) flecheOeil.joueur = transform;
 
         sprites = GetComponentsInChildren<SpriteRenderer>(true);
@@ -261,6 +271,7 @@ public class player : MonoBehaviour
         launchdirection = derniereDirection;
         OrienterBras(launchdirection);
         animatorClim.SetTrigger("Launch");
+        JouerSon(sonLancer);
     }
 
     // --- Caddie : détruit tout ennemi touché ---
@@ -282,6 +293,7 @@ public class player : MonoBehaviour
         if (timerbarFrost < timeBarFrost) return; // jauge pas encore rechargée
 
         timerbarFrost = 0f;
+        JouerSon(sonGel);
         Geler();
     }
 
@@ -345,6 +357,15 @@ public class player : MonoBehaviour
     }
 
     // --- Flèche & sons ---
+
+    // Son ponctuel : se superpose aux autres, pitch légèrement aléatoire pour éviter la répétition
+    public void JouerSon(AudioClip clip)
+    {
+        if (clip == null || audioActions == null) return;
+
+        audioActions.pitch = 1f + Random.Range(-variationPitch, variationPitch);
+        audioActions.PlayOneShot(clip, volumeActions);
+    }
 
     private void UpdateFlecheOeil()
     {
