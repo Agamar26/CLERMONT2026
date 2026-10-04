@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Globalization;
 using System.Linq;
 using Photon.Pun;
@@ -25,7 +26,7 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
         // Fait spawner le joueur local dès qu'il arrive dans la scène (si déjà dans une salle)
         if (PhotonNetwork.InRoom)
         {
-            AssignPlayerSlot();
+           StartCoroutine(SpawnPlayer());
         }
     }
     private void Update()
@@ -98,6 +99,7 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
         }
         if (!PhotonNetwork.IsMasterClient)
         {
+
             stateGame targetState = (stateGame)System.Enum.Parse(typeof(stateGame), currentstateName);
 
             // 2. Ensuite, comparez directement les enums sans refaire de Parse :
@@ -109,11 +111,11 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
 
         if (PhotonNetwork.IsMasterClient)
         {
-            var dsds = GameObject.FindGameObjectsWithTag("Player");
-            if (dsds.Length != 2)
-            {
+           // var dsds = GameObject.FindGameObjectsWithTag("Player");
+            //if (dsds.Length != 2)
+           // {
                
-            }
+          //  }
         }
 
     }
@@ -131,55 +133,56 @@ public class networkManager : MonoBehaviourPunCallbacks,IPunObservable
         }
 
     }
-
-
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        
+        // Sécurité si on rejoint la salle après le chargement de la scène
+        StartCoroutine(SpawnPlayer());
     }
 
-    void AssignPlayerSlot()
+    public IEnumerator SpawnPlayer()
     {
-        int assignedSlot = -1;
-
-        // On regarde quel slot est libre (0 ou 1)
-        foreach (Player p in PhotonNetwork.PlayerList)
-        {
-            if (p.CustomProperties.ContainsKey("PlayerSlot"))
-            {
-                int slot = (int)p.CustomProperties["PlayerSlot"];
-                if (slot == 0) assignedSlot = 1; // Si 0 est pris, on prend 1
-            }
-        }
-
-        if (assignedSlot == -1) assignedSlot = 0; // Par défaut le premier prend 0
-
-        // On sauvegarde cette info dans les propriétés du joueur sur le réseau
-        ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable() { { "PlayerSlot", assignedSlot } };
-        PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-
-        // Une fois assigné, on fait spawner le joueur
-        SpawnPlayer(assignedSlot);
-    }
-    void SpawnPlayer(int slot)
-    {
-        Vector3 spawnPosition;
-        Quaternion spawnRotation;
-
-        if (slot == 0)
+        // Récupère le nombre total de joueurs pour déterminer la position
+        int playerIndex = PhotonNetwork.CurrentRoom.PlayerCount;
+        Vector3 spawnPosition = Vector2.zero;
+        Quaternion spawnRotation = Quaternion.identity;
+        if (playerIndex == 1)
         {
             spawnPosition = new Vector3(-8.2f, 0, 0);
             spawnRotation = Quaternion.Euler(0, 0, -90);
         }
-        else
+        else if (playerIndex == 2)
         {
-            spawnPosition = new Vector3(8.2f, 0, 0);
-            spawnRotation = Quaternion.Euler(0, 0, 90);
+            print("loloololo");
+            var ez = GameObject.FindGameObjectWithTag("Player");
+            while (ez == null)
+            {
+                
+                ez = GameObject.FindGameObjectWithTag("Player");
+                yield return null;
+            }
+            // Alternance gauche / droite selon l'ordre d'arrivée
+            if (ez.transform.position.x > 0)
+            {
+                spawnPosition = new Vector3(-8.2f, 0, 0);
+                spawnRotation = Quaternion.Euler(0, 0, -90);
+            }
+            else
+            {
+                spawnPosition = new Vector3(8.2f, 0, 0);
+                spawnRotation = Quaternion.Euler(0, 0, 90);
+            }
         }
+        // Chaque client instancie son propre personnage sur le réseau
+        var ese = PhotonNetwork.Instantiate(playerprefab.name, spawnPosition, spawnRotation);
+        
 
-        PhotonNetwork.Instantiate(playerprefab.name, spawnPosition, spawnRotation);
+
+
+        yield break;
+       
     }
+
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting)
