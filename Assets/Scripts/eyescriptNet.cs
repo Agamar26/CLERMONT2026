@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Photon.Pun;
+using UnityEditor.UIElements;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
@@ -10,6 +11,7 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     public float forceLaunch;
     public float timerCanGetBall;
     public LayerMask nulllayermask;
+    public int plusball;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,10 +25,14 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsMasterClient) { return; }
 
-        for (int i = 0; i < origin.Count; i++)
+        if(origin != null && origin.Count != 0 )
         {
-            Debug.DrawRay(origin[i], direction[i], Color.red);
+            for (int i = 0; i < origin.Count; i++)
+            {
+                Debug.DrawRay(origin[i], direction[i], Color.red);
+            }
         }
+      
     }
     public void launchBall()
     {
@@ -39,11 +45,34 @@ public class eyescriptNet : MonoBehaviourPunCallbacks
     {
        if(PhotonNetwork.IsMasterClient)
         {
-            Vector2 contact = collision.contacts[0].point;
-            Vector2 eze = Vector2.Reflect((contact - origin[origin.Count - 1]).normalized, collision.contacts[0].normal);
-            origin.Add(contact);
-            direction.Add(eze);
-            GetComponent<Rigidbody2D>().linearVelocity = eze.normalized * (forceLaunch *2);
+            if(collision.gameObject.tag != "Death")
+            {
+                if (collision.gameObject.tag == "Player")
+                {
+                    plusball++;
+                    Vector2 contact = collision.contacts[0].point;
+                    Vector2 eze = Vector2.Reflect((contact - origin[origin.Count - 1]).normalized, collision.contacts[0].normal);
+                    origin.Add(contact);
+                    direction.Add(collision.contacts[0].normal);
+                    GetComponent<Rigidbody2D>().linearVelocity = collision.contacts[0].normal * (forceLaunch + plusball);
+                }
+                else
+                {
+                    Vector2 contact = collision.contacts[0].point;
+                    Vector2 eze = Vector2.Reflect((contact - origin[origin.Count - 1]).normalized, collision.contacts[0].normal);
+                    origin.Add(contact);
+                    direction.Add(eze);
+                    GetComponent<Rigidbody2D>().linearVelocity = eze.normalized * (forceLaunch + plusball);
+                }
+                
+               
+            }
+            if (collision.gameObject.tag == "Death")
+            {
+                PhotonNetwork.Destroy(this.gameObject);
+                networkManager.instance.currentstateName = "respawnball";
+                networkManager.instance.state = networkManager.stateGame.respawnball;
+            }
             
         }
     

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Voiture
   - Oeil
+  - Death
   layers:
   - Default
   - TransparentFX
