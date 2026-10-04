@@ -13531,14 +13531,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: lengthInSec
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4482561461537248265, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.38
+      objectReference: {fileID: 0}
     - target: {fileID: 7749021254736249328, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 7902476785784029509, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: speed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7902476785784029509, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
       propertyPath: camera
       value: 
       objectReference: {fileID: 2107669150}
+    - target: {fileID: 7902476785784029509, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
+      propertyPath: basespeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7902476785784029509, guid: 21d24bdecec5ebb47aaa0f0886a4eb23, type: 3}
       propertyPath: flecheOeil
       value: 
@@ -14459,7 +14479,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 3044ea9377ed87446b599e79222a1a00, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.082
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
